@@ -1,4 +1,4 @@
-package com.chohay.chohay.controllers.models;
+package com.chohay.chohay.models;
 
 /**
  *
