@@ -9,5 +9,5 @@ package TestModels;
  * @author Tuan
  */
 public class NewClass {
-    
+    int adbashdsa;
 }
