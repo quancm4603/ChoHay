@@ -49,7 +49,7 @@ public class TestUserService {
         user.setFullName("Lê Mạnh Hùng");
         user.setRole(2);
         user.setAvatar("/images/1.png");
-        userService.addUser(user);
+        System.out.println(userService.addUser(user));
         
     }
     

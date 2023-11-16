@@ -40,9 +40,10 @@ public class UserService {
     }
 
     // Thêm người dùng mới vào database
-    public void addUser(User user) throws SQLException {
+    public int addUser(User user) throws SQLException {
+        int generatedId = -1; // Giá trị mặc định trả về nếu không có ID được sinh ra
         String query = "INSERT INTO Users (username, email, password, phone, address_id, full_name, role, avatar) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, user.getUsername());
             preparedStatement.setString(2, user.getEmail());
             preparedStatement.setString(3, user.getPassword());
@@ -51,8 +52,21 @@ public class UserService {
             preparedStatement.setString(6, user.getFullName());
             preparedStatement.setInt(7, user.getRole());
             preparedStatement.setString(8, user.getAvatar());
-            preparedStatement.executeUpdate();
+            
+            int affectedRows = preparedStatement.executeUpdate();
+            if (affectedRows == 0) {
+                throw new SQLException("Thêm địa chỉ không thành công, không có hàng nào được tạo ra.");
+            }
+
+            try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    generatedId = generatedKeys.getInt(1); // Lấy ID được sinh ra
+                } else {
+                    throw new SQLException("Thêm địa chỉ không thành công, không có ID được tạo ra.");
+                }
+            }
         }
+        return generatedId; // Trả về ID của địa chỉ vừa thêm vào
     }
 
     // Sửa thông tin người dùng trong database
@@ -104,6 +118,22 @@ public class UserService {
         String query = "SELECT * FROM Users WHERE id=?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, userId);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    user = extractUserFromResultSet(resultSet);
+                }
+            }
+        }
+        return user;
+    }
+
+    // Lấy người dùng từ database dựa trên username OR email
+    public User getUserByUserNameOrEmail(String username) throws SQLException {
+        User user = null;
+        String query = "SELECT * FROM Users WHERE username=? OR email=?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, username);
+            preparedStatement.setString(2, username);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     user = extractUserFromResultSet(resultSet);
