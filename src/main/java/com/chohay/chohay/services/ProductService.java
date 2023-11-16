@@ -20,7 +20,7 @@ import java.util.List;
  * @author caomi
  */
 public class ProductService {
-    
+
     private Connection connection;
 
     // Database connection parameters
@@ -48,9 +48,10 @@ public class ProductService {
         }
     }
 
-    public void addProduct(Product product) throws SQLException {
+    public int addProduct(Product product) throws SQLException {
+        int generatedId = -1; // Giá trị mặc định trả về nếu không có ID được sinh ra
         String query = "INSERT INTO Products (user_id, name, price, description, image, phone, address_id, category, details) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setInt(1, product.getUserId());
             preparedStatement.setString(2, product.getName());
             preparedStatement.setLong(3, product.getPrice());
@@ -60,12 +61,26 @@ public class ProductService {
             preparedStatement.setInt(7, product.getAddressId());
             preparedStatement.setString(8, product.getCategory());
             preparedStatement.setString(9, product.getDetails().toJson());
-//            preparedStatement.setString(9, product.getDetails().);
-            preparedStatement.executeUpdate();
+            
+            int affectedRows = preparedStatement.executeUpdate();
+            
+            if (affectedRows == 0) {
+                throw new SQLException("Thêm địa chỉ không thành công, không có hàng nào được tạo ra.");
+            }
+
+            try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    generatedId = generatedKeys.getInt(1); // Lấy ID được sinh ra
+                } else {
+                    throw new SQLException("Thêm địa chỉ không thành công, không có ID được tạo ra.");
+                }
+            }
         }
+        return generatedId; // Trả về ID của địa chỉ vừa thêm vào
+
     }
-    
-    public List<Product> getAllProducts()throws SQLException {
+
+    public List<Product> getAllProducts() throws SQLException {
         List<Product> products = new ArrayList<>();
         String query = "SELECT * FROM Products";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -77,7 +92,7 @@ public class ProductService {
         }
         return products;
     }
-    
+
     // Phương thức hỗ trợ để chuyển dữ liệu từ ResultSet thành đối tượng User
     private Product extractProductFromResultSet(ResultSet resultSet) throws SQLException {
         Product product = new Product();
@@ -94,6 +109,5 @@ public class ProductService {
         product.setDetails(gson.fromJson(resultSet.getString("details"), Details.class));
         return product;
     }
-    
-    
+
 }
