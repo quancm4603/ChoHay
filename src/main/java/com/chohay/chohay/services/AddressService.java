@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  *
  * @author caomi
@@ -25,7 +26,6 @@ public class AddressService {
     private String jdbcUsername = "root";
     private String jdbcPassword = "123456";
 
-    
     public AddressService() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -85,7 +85,7 @@ public class AddressService {
         List<Address> addresses = new ArrayList<>();
         String query = "SELECT * FROM Addresses";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query);
-             ResultSet resultSet = preparedStatement.executeQuery()) {
+                ResultSet resultSet = preparedStatement.executeQuery()) {
             while (resultSet.next()) {
                 Address address = new Address();
                 address.setId(resultSet.getInt("id"));
@@ -98,4 +98,25 @@ public class AddressService {
         }
         return addresses;
     }
+
+    // Lấy địa chỉ từ database dựa trên id
+    public Address getAddressById(int addressId) throws SQLException {
+        Address address = null;
+        String query = "SELECT * FROM Addresses WHERE id=?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setLong(1, addressId);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    address = new Address();
+                    address.setId(resultSet.getInt("id"));
+                    address.setProvince(resultSet.getString("province"));
+                    address.setCity(resultSet.getString("city"));
+                    address.setDistrict(resultSet.getString("district"));
+                    address.setStreet(resultSet.getString("street"));
+                }
+            }
+        }
+        return address;
+    }
+
 }

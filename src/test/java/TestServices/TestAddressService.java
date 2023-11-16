@@ -36,11 +36,19 @@ public class TestAddressService {
         address.setProvince("Phu Yen");
         address.setCity("Dong Hoa");
         address.setDistrict("Hoa Thanh");
-        address.setStreet("Hoa Thanh");
-        
+        address.setStreet("Hoa Thanh");       
         addressService.addAddress(address);
         
     }
+    
+    @Test
+    public void testGetAddress() throws SQLException{
+        Address address = addressService.getAddressById(1);
+        System.out.println(address);
+        
+    }
+    
+    
     
     
 }
