@@ -4,7 +4,9 @@
  */
 package TestServices;
 
+import com.chohay.chohay.models.Address;
 import com.chohay.chohay.models.User;
+import com.chohay.chohay.services.AddressService;
 import com.chohay.chohay.services.UserService;
 import java.sql.SQLException;
 import java.util.List;
@@ -35,12 +37,19 @@ public class TestUserService {
         user.setEmail("hunglm@gmail.com");
         user.setPassword("12345678");
         user.setPhone("0349782228");
-        user.setAddressId(1);
+        
+        Address address = new Address();
+        address.setProvince("Ha Noi");
+        address.setCity("Ba Dinh");
+        address.setDistrict("Phuc Xa");
+        address.setStreet("Phuong 5");
+        AddressService addressService = new AddressService();
+        int addressId = addressService.addAddress(address);
+        user.setAddressId(addressId);
         user.setFullName("Lê Mạnh Hùng");
         user.setRole(2);
         user.setAvatar("/images/1.png");
-        
-        userService.addUser(user);
+        System.out.println(userService.addUser(user));
         
     }
     
