@@ -28,6 +28,7 @@ public class TestAddress {
         
         Gson gson = new Gson();
         String out = gson.toJson(person);
+        
         System.out.println(out);
         Person another = gson.fromJson(out, Person.class);
         System.out.println(another.id);

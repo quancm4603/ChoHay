@@ -4,10 +4,96 @@
  */
 package com.chohay.chohay.services;
 
+import com.chohay.chohay.models.Product;
+import com.chohay.chohay.models.details.Details;
+import com.google.gson.Gson;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author caomi
  */
 public class ProductService {
+    
+    private Connection connection;
+
+    // Database connection parameters
+    private String jdbcURL = "jdbc:mysql://localhost:3306/chohay";
+    private String jdbcUsername = "root";
+    private String jdbcPassword = "123456";
+
+    public ProductService() {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connection = DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Close the database connection
+    public void closeConnection() {
+        try {
+            if (connection != null) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void addProduct(Product product) throws SQLException {
+        String query = "INSERT INTO Products (user_id, name, price, description, image, phone, address_id, category, details) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, product.getUserId());
+            preparedStatement.setString(2, product.getName());
+            preparedStatement.setLong(3, product.getPrice());
+            preparedStatement.setString(4, product.getDescription());
+            preparedStatement.setString(5, product.getImage());
+            preparedStatement.setString(6, product.getPhone());
+            preparedStatement.setInt(7, product.getAddressId());
+            preparedStatement.setString(8, product.getCategory());
+            preparedStatement.setString(9, product.getDetails().toJson());
+//            preparedStatement.setString(9, product.getDetails().);
+            preparedStatement.executeUpdate();
+        }
+    }
+    
+    public List<Product> getAllProducts()throws SQLException {
+        List<Product> products = new ArrayList<>();
+        String query = "SELECT * FROM Products";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query);
+                ResultSet resultSet = preparedStatement.executeQuery()) {
+            while (resultSet.next()) {
+                Product product = extractProductFromResultSet(resultSet);
+                products.add(product);
+            }
+        }
+        return products;
+    }
+    
+    // Phương thức hỗ trợ để chuyển dữ liệu từ ResultSet thành đối tượng User
+    private Product extractProductFromResultSet(ResultSet resultSet) throws SQLException {
+        Product product = new Product();
+        product.setId(resultSet.getInt("id"));
+        product.setUserId(resultSet.getInt("user_id"));
+        product.setName(resultSet.getString("name"));
+        product.setPrice(resultSet.getLong("price"));
+        product.setDescription(resultSet.getString("description"));
+        product.setImage(resultSet.getString("image"));
+        product.setPhone(resultSet.getString("phone"));
+        product.setAddressId(resultSet.getInt("address_id"));
+        product.setCategory(resultSet.getString("category"));
+        Gson gson = new Gson();
+        product.setDetails(gson.fromJson(resultSet.getString("details"), Details.class));
+        return product;
+    }
+    
     
 }

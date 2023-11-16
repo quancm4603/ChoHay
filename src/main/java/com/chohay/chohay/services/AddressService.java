@@ -46,16 +46,31 @@ public class AddressService {
         }
     }
 
-    // Thêm địa chỉ mới vào database
-    public void addAddress(Address address) throws SQLException {
+    // Thêm địa chỉ mới vào database và trả về ID của địa chỉ vừa thêm
+    public int addAddress(Address address) throws SQLException {
+        int generatedId = -1; // Giá trị mặc định trả về nếu không có ID được sinh ra
+
         String query = "INSERT INTO Addresses (province, city, district, street) VALUES (?, ?, ?, ?)";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, address.getProvince());
             preparedStatement.setString(2, address.getCity());
             preparedStatement.setString(3, address.getDistrict());
             preparedStatement.setString(4, address.getStreet());
-            preparedStatement.executeUpdate();
+
+            int affectedRows = preparedStatement.executeUpdate();
+            if (affectedRows == 0) {
+                throw new SQLException("Thêm địa chỉ không thành công, không có hàng nào được tạo ra.");
+            }
+
+            try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    generatedId = generatedKeys.getInt(1); // Lấy ID được sinh ra
+                } else {
+                    throw new SQLException("Thêm địa chỉ không thành công, không có ID được tạo ra.");
+                }
+            }
         }
+        return generatedId; // Trả về ID của địa chỉ vừa thêm vào
     }
 
     // Sửa thông tin địa chỉ trong database

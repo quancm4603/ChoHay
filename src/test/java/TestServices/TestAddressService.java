@@ -26,7 +26,7 @@ public class TestAddressService {
         address.setDistrict("Hoa Thanh");
         address.setStreet("Hoa Thanh");
         
-        addressService.addAddress(address);
+        System.out.println(addressService.addAddress(address));
         
     }
     
