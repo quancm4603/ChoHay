@@ -4,11 +4,9 @@
  */
 package com.chohay.chohay.models.details;
 
-
 /**
  *
- * @author caomi
+ * @author LINH
  */
-
-public abstract class VehicleDetails extends Details{
+public abstract class PetDetails extends Details{
 }

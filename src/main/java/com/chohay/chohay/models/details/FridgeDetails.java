@@ -4,6 +4,10 @@
  */
 package com.chohay.chohay.models.details;
 
+/**
+ *
+ * @author LINH
+ */
 import com.google.gson.Gson;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,14 +15,21 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-/**
- *
- * @author caomi
- */
-//@Data
-//@AllArgsConstructor
-//@NoArgsConstructor
-//@Getter
-//@Setter
-public abstract class RealEstateDetails extends Details{
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+public class FridgeDetails extends HousewareDetails{
+    private String brand;
+    private int volumn;
+    private String guarantee;
+    private String original;
+    private String role;
+    
+    @Override
+    public String toJson() {
+        Gson gson = new Gson();
+        return gson.toJson(this);
+    }
 }
