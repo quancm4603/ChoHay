@@ -16,9 +16,6 @@ public class TestDetails {
     
     @Test
     public void testDetails(){
-        Details details = new RealEstateDetails(200, "Co giay to");
-        System.out.println(details.toJson());
-        
     }
         
     
