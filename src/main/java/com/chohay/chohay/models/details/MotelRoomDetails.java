@@ -25,7 +25,6 @@ public class MotelRoomDetails extends RealEstateDetails{
     
     private String funiture;
     private double area;
-    private String role;
     @Override
     public String toJson() {
         Gson gson = new Gson();

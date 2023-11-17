@@ -24,8 +24,7 @@ public class CatDetails extends PetDetails{
     
     private String breed;
     private double age;
-    private String size;
-    private String role;
+    private int size;
     
     @Override
     public String toJson() {

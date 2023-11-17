@@ -24,11 +24,10 @@ public class TabletsDetails extends ElectroniceDeviceDetails{
     private String status;
     private String brand;
     private String version;
-    private String memory;
+    private int memory;
     private String screenSize;
     private String guarantee;
     private String original;
-    private String role;
     
     
     

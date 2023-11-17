@@ -30,7 +30,6 @@ public class TruckDetails extends VehicleDetails {
     private String color;
     private String lisencePlate;
     private double km;
-    private String role;
 
     @Override
     public String toJson() {

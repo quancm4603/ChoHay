@@ -25,7 +25,6 @@ public class AirConditionerDetails extends HousewareDetails{
     private int powerCapacity;
     private String guarantee;
     private String original;
-    private String role;
     
     @Override
     public String toJson() {

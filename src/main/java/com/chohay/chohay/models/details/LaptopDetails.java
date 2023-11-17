@@ -24,14 +24,13 @@ public class LaptopDetails extends ElectroniceDeviceDetails{
     private String status;
     private String brand;
     private String microprocessor;
-    private String RAM;
+    private int RAM;
     private int hardDrive;
     private String typeOfHardDrive;
     private String card;
-    private String screenSize;
+    private double screenSize;
     private String guarantee;
     private String original;
-    private String role;
     
     
     
