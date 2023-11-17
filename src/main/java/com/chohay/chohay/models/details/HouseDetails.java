@@ -31,7 +31,6 @@ public class HouseDetails extends RealEstateDetails {
     private double area;
     private double length;
     private double width;
-    private String role;
 
     @Override
     public String toJson() {

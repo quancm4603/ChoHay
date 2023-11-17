@@ -25,7 +25,6 @@ public class FridgeDetails extends HousewareDetails{
     private int volumn;
     private String guarantee;
     private String original;
-    private String role;
     
     @Override
     public String toJson() {

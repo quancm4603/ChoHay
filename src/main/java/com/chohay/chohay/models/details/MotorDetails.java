@@ -29,7 +29,6 @@ public class MotorDetails extends VehicleDetails {
     private String lisencePlate;
     private String original;
     private double km;
-    private String role;
 
     @Override
     public String toJson() {

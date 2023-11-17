@@ -26,7 +26,6 @@ public class TelevisionDetails extends ElectroniceDeviceDetails{
     private String version;
     private String guarantee;
     private String original;
-    private String role;
     
     
     

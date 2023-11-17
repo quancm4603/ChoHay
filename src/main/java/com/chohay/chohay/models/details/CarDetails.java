@@ -31,7 +31,6 @@ public class CarDetails extends VehicleDetails{
     private String color;
     private String lisencePlate;
     private double km;
-    private String role;
     
     
     @Override

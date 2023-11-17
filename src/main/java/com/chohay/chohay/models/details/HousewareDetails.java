@@ -9,5 +9,4 @@ package com.chohay.chohay.models.details;
  * @author LINH
  */
 public abstract class HousewareDetails extends Details{
-    public abstract String toJson();
 }

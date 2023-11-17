@@ -25,7 +25,6 @@ public class CameraDetails extends ElectroniceDeviceDetails{
     private String type;
     private String guarantee;
     private String original;
-    private String role;
     
     
     

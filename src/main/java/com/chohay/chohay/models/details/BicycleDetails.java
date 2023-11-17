@@ -26,7 +26,6 @@ public class BicycleDetails extends VehicleDetails{
     private String original;
     private String color;
     private String frameMaterial;
-    private String role;
     
     
     @Override

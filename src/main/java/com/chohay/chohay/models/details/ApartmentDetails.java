@@ -20,6 +20,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
+
 public class ApartmentDetails extends RealEstateDetails {
     
     
@@ -30,7 +31,6 @@ public class ApartmentDetails extends RealEstateDetails {
     private String legalDocuments;
     private String funiture;
     private double area;
-    private String role;
 
     @Override
     public String toJson() {

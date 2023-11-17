@@ -24,11 +24,9 @@ public class PhoneDetails extends ElectroniceDeviceDetails{
     private String status;
     private String brand;
     private String color;
-    private String memory;
+    private int memory;
     private String guarantee;
     private String original;
-    private String role;
-    
     
     @Override
     public String toJson() {

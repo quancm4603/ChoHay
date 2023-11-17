@@ -22,9 +22,8 @@ import lombok.Setter;
 @Setter
 public class FunitureDetails extends HousewareDetails{
     private String brand;
-    private double material;
+    private String material;
     private String original;
-    private String role;
     
     @Override
     public String toJson() {
