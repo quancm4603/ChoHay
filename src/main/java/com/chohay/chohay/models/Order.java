@@ -8,8 +8,6 @@ package com.chohay.chohay.models;
  *
  * @author caomi
  */
-import com.chohay.chohay.models.details.Details;
-import com.google.gson.Gson;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -28,16 +26,16 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class Product {
+public class Order {
     private int id;
-    private int userId;
-    private String name;
-    private long price;
-    private String description;
-    private String image;
-    private String phone;
-    private int addressId;
-    private String category;
-    private Details details;
+    private int productId;
+    private int sellerId;
+    private int customerId;
+    private String receiverName;
+    private String receiverPhone;
+    private String receiverEmail;
+    private Address receiverAddress;
+    private int status;
+    private String customerComment;
     
 }
