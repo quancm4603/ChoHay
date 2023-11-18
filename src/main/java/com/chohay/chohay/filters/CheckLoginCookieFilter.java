@@ -55,10 +55,12 @@ public class CheckLoginCookieFilter implements Filter {
                 }
                 UserService userService = new UserService();
                 try {
-                    if (userService.validateUser(username, password)) {
-                        session = httpRequest.getSession();
-                        User user = userService.getUserByUserNameOrEmail(username);
-                        session.setAttribute("user", user);
+                    if (username != null && password != null) {
+                        if (userService.validateUser(username, password)) {
+                            session = httpRequest.getSession();
+                            User user = userService.getUserByUserNameOrEmail(username);
+                            session.setAttribute("user", user);
+                        }
                     }
                 } catch (SQLException ex) {
                     Logger.getLogger(CheckLoginCookieFilter.class.getName()).log(Level.SEVERE, null, ex);
