@@ -23,7 +23,7 @@ import lombok.Setter;
 public class DogDetails extends PetDetails{
     
     private String breed;
-    private double age;
+    private int age;
     private int size;
     
     @Override
