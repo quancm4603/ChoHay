@@ -31,6 +31,13 @@ public class TestProductService {
         
     }
     
+    @Test
+    public void testAddNew(){
+        Product product = new Product();
+        
+        
+    }
+    
 
     
     
