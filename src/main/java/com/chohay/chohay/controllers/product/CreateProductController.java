@@ -29,7 +29,7 @@ public class CreateProductController extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/product/create-product.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/product/create_product.jsp");
         requestDispatcher.forward(request, response);
 
     }
