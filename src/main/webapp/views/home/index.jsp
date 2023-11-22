@@ -18,6 +18,8 @@
 
 <body>
     <%@include file="../layout/header.jsp" %>
+    <!--bodyhere-->
+    <%@include file="../layout/footer.jsp" %>
     <%@include file="../resources/script.jsp" %>
 </body>
 
