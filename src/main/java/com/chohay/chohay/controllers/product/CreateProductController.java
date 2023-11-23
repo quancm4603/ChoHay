@@ -9,6 +9,7 @@ import com.chohay.chohay.models.Product;
 import com.chohay.chohay.models.User;
 import com.chohay.chohay.models.details.ApartmentDetails;
 import com.chohay.chohay.models.details.Details;
+import com.chohay.chohay.models.details.PhoneDetails;
 import com.chohay.chohay.services.AddressService;
 import com.chohay.chohay.services.ProductService;
 import java.io.IOException;
@@ -79,6 +80,22 @@ public class CreateProductController extends HttpServlet {
                             request.getParameter("funiture"),
                             Double.parseDouble(request.getParameter("area"))
                     );
+                }else if (category.equals("Phone")){
+                    //Phone details
+                    details = new PhoneDetails(
+                            request.getParameter("status"),
+                            request.getParameter("brand"),
+                            request.getParameter("color"),
+                            Integer.parseInt(request.getParameter("memory")),
+                            request.getParameter("guarantee"),
+                            request.getParameter("original")
+                    );
+                    
+                }else if (category.equals("Dog")){
+                    //Dog details
+                    
+                    
+                    
                 }
 
             }
