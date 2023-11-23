@@ -24,7 +24,6 @@ import lombok.Setter;
 public class ApartmentDetails extends RealEstateDetails {
     
     
-    private int floor;
     private String type;
     private int bedroom;
     private int bathroom;
