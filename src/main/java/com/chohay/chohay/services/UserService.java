@@ -12,7 +12,6 @@ import java.util.List;
 
 public class UserService {
 
-    private Connection connection;
 
     // Database connection parameters
     private String jdbcURL = "jdbc:mysql://localhost:3306/chohay";
@@ -20,17 +19,23 @@ public class UserService {
     private String jdbcPassword = "123456";
 
     public UserService() {
+    }
+    
+    private Connection getConnection() throws SQLException {
+        Connection connection = null;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+        return connection;
     }
 
     // Close the database connection
     public void closeConnection() {
         try {
+            Connection connection = getConnection();
             if (connection != null) {
                 connection.close();
             }
@@ -43,7 +48,7 @@ public class UserService {
     public int addUser(User user) throws SQLException {
         int generatedId = -1; // Giá trị mặc định trả về nếu không có ID được sinh ra
         String query = "INSERT INTO Users (username, email, password, phone, address_id, full_name, role, avatar) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS)) {
+        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, user.getUsername());
             preparedStatement.setString(2, user.getEmail());
             preparedStatement.setString(3, user.getPassword());
@@ -72,7 +77,7 @@ public class UserService {
     // Sửa thông tin người dùng trong database
     public void updateUser(User user) throws SQLException {
         String query = "UPDATE Users SET username=?, email=?, password=?, phone=?, address_id=?, full_name=?, role=?, avatar=? WHERE id=?";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, user.getUsername());
             preparedStatement.setString(2, user.getEmail());
             preparedStatement.setString(3, user.getPassword());
@@ -92,7 +97,7 @@ public class UserService {
 
         //Delete User
         String queryUser = "DELETE FROM Users WHERE id=?";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(queryUser)) {
+        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(queryUser)) {
             preparedStatement.setInt(1, userId);
             preparedStatement.executeUpdate();
         }
@@ -102,7 +107,7 @@ public class UserService {
     public List<User> getAllUsers() throws SQLException {
         List<User> users = new ArrayList<>();
         String query = "SELECT * FROM Users";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query);
+        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query);
                 ResultSet resultSet = preparedStatement.executeQuery()) {
             while (resultSet.next()) {
                 User user = extractUserFromResultSet(resultSet);
@@ -116,7 +121,7 @@ public class UserService {
     public User getUserById(int userId) throws SQLException {
         User user = null;
         String query = "SELECT * FROM Users WHERE id=?";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, userId);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
@@ -131,7 +136,7 @@ public class UserService {
     public User getUserByUserNameOrEmail(String username) throws SQLException {
         User user = null;
         String query = "SELECT * FROM Users WHERE username=? OR email=?";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, username);
             preparedStatement.setString(2, username);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -148,7 +153,7 @@ public class UserService {
         boolean isValid = false;
         String query = "SELECT * FROM Users WHERE username=? OR email=? AND password=?";
 
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, username);
             preparedStatement.setString(2, username);
             preparedStatement.setString(3, password);

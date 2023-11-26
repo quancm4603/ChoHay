@@ -21,7 +21,6 @@ import java.util.List;
  */
 public class ProductService {
 
-    private Connection connection;
 
     // Database connection parameters
     private String jdbcURL = "jdbc:mysql://localhost:3306/chohay";
@@ -29,17 +28,24 @@ public class ProductService {
     private String jdbcPassword = "123456";
 
     public ProductService() {
+    }
+    
+    private Connection getConnection() throws SQLException {
+        Connection connection = null;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+        return connection;
     }
+    
 
     // Close the database connection
     public void closeConnection() {
         try {
+            Connection connection = getConnection();
             if (connection != null) {
                 connection.close();
             }
@@ -51,7 +57,7 @@ public class ProductService {
     public int addProduct(Product product) throws SQLException {
         int generatedId = -1; // Giá trị mặc định trả về nếu không có ID được sinh ra
         String query = "INSERT INTO Products (user_id, name, price, description, image, phone, address_id, category, details) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS)) {
+        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setInt(1, product.getUserId());
             preparedStatement.setString(2, product.getName());
             preparedStatement.setLong(3, product.getPrice());
@@ -83,7 +89,7 @@ public class ProductService {
     public List<Product> getAllProducts() throws SQLException {
         List<Product> products = new ArrayList<>();
         String query = "SELECT * FROM Products";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query);
+        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query);
                 ResultSet resultSet = preparedStatement.executeQuery()) {
             while (resultSet.next()) {
                 Product product = extractProductFromResultSet(resultSet);

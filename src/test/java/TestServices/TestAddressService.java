@@ -6,6 +6,7 @@ package TestServices;
 
 import com.chohay.chohay.models.Address;
 import com.chohay.chohay.services.AddressService;
+import com.chohay.chohay.services.AddressServiceSingleton;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -16,7 +17,7 @@ import org.junit.Test;
  * @author caomi
  */
 public class TestAddressService {
-    private AddressService addressService = new AddressService();
+    private AddressService addressService = AddressServiceSingleton.getInstance();
     
     @Test
     public void testAddAddress() throws SQLException{

@@ -13,6 +13,7 @@ import com.chohay.chohay.models.details.PhoneDetails;
 import com.chohay.chohay.models.details.VehicleDetails;
 import com.chohay.chohay.services.AddressService;
 import com.chohay.chohay.services.ProductService;
+import com.chohay.chohay.services.ProductServiceSingleton;
 import com.google.gson.Gson;
 import java.sql.SQLException;
 import java.util.List;
@@ -23,7 +24,7 @@ import org.junit.Test;
  * @author caomi
  */
 public class TestProductService {
-    ProductService productService = new ProductService();
+    ProductService productService = ProductServiceSingleton.getInstance();
     
     @Test
     public void testListAllProduct() throws SQLException{
@@ -74,7 +75,6 @@ public class TestProductService {
 //                    1);
 //        }
         details = new ApartmentDetails(
-                    2, 
                     "Căn hộ", 
                     2, 
                     1, 
