@@ -9,11 +9,13 @@ import com.chohay.chohay.models.Product;
 import com.chohay.chohay.models.User;
 import com.chohay.chohay.models.details.ApartmentDetails;
 import com.chohay.chohay.models.details.Details;
+import com.chohay.chohay.models.details.DogDetails;
 import com.chohay.chohay.models.details.PhoneDetails;
 import com.chohay.chohay.services.AddressService;
+import com.chohay.chohay.services.AddressServiceSingleton;
 import com.chohay.chohay.services.ProductService;
+import com.chohay.chohay.services.ProductServiceSingleton;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.SQLException;
@@ -93,7 +95,11 @@ public class CreateProductController extends HttpServlet {
                     
                 }else if (category.equals("Dog")){
                     //Dog details
-                    
+                    details = new DogDetails(
+                            request.getParameter("breed"),
+                            Integer.parseInt(request.getParameter("age")),
+                            Integer.parseInt(request.getParameter("size"))
+                    );
                     
                     
                 }
@@ -133,14 +139,14 @@ public class CreateProductController extends HttpServlet {
             address.setDistrict(district);
             address.setStreet(street);
 
-            AddressService addressService = new AddressService();
+            AddressService addressService = AddressServiceSingleton.getInstance();
             int addressId = addressService.addAddress(address);
             product.setAddressId(addressId);
             product.setCategory(category);
             product.setDetails(details);
             
             //Add to product service
-            ProductService productService = new ProductService();
+            ProductService productService = ProductServiceSingleton.getInstance();
             productService.addProduct(product);
             
             response.sendRedirect("./");

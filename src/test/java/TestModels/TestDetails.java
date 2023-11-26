@@ -21,7 +21,7 @@ public class TestDetails {
     
     @Test
     public void testApartmentDetails(){
-        Details details = new ApartmentDetails(0, "", 0, 0, "", "", 0);
+        Details details = new ApartmentDetails();
         
         Gson gson = new Gson();
         

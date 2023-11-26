@@ -7,6 +7,7 @@ package com.chohay.chohay.controllers.authen;
 
 import com.chohay.chohay.models.User;
 import com.chohay.chohay.services.UserService;
+import com.chohay.chohay.services.UserServiceSingleton;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -50,7 +51,7 @@ public class LoginController extends HttpServlet {
             String password = request.getParameter("password");
             
             //Valitade
-            UserService userService = new UserService();
+            UserService userService = UserServiceSingleton.getInstance();
             if (userService.validateUser(username, password)) {
                 HttpSession session = request.getSession();
                 User user = userService.getUserByUserNameOrEmail(username);

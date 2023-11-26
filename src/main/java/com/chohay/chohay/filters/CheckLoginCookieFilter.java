@@ -6,6 +6,7 @@ package com.chohay.chohay.filters;
 
 import com.chohay.chohay.models.User;
 import com.chohay.chohay.services.UserService;
+import com.chohay.chohay.services.UserServiceSingleton;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -53,7 +54,7 @@ public class CheckLoginCookieFilter implements Filter {
                         password = cookie.getValue();
                     }
                 }
-                UserService userService = new UserService();
+                UserService userService = UserServiceSingleton.getInstance();
                 try {
                     if (username != null && password != null) {
                         if (userService.validateUser(username, password)) {

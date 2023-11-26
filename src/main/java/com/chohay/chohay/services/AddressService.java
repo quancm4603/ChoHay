@@ -19,7 +19,6 @@ import java.util.List;
  */
 public class AddressService {
 
-    private Connection connection;
 
     // Database connection parameters
     private String jdbcURL = "jdbc:mysql://localhost:3306/chohay";
@@ -27,17 +26,23 @@ public class AddressService {
     private String jdbcPassword = "123456";
 
     public AddressService() {
+    }
+    
+    private Connection getConnection() throws SQLException {
+        Connection connection = null;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+        return connection;
     }
 
     // Close the database connection
     public void closeConnection() {
         try {
+            Connection connection = getConnection();
             if (connection != null) {
                 connection.close();
             }
@@ -51,7 +56,7 @@ public class AddressService {
         int generatedId = -1; // Giá trị mặc định trả về nếu không có ID được sinh ra
 
         String query = "INSERT INTO Addresses (province, city, district, street) VALUES (?, ?, ?, ?)";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS)) {
+        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, address.getProvince());
             preparedStatement.setString(2, address.getCity());
             preparedStatement.setString(3, address.getDistrict());
@@ -76,7 +81,7 @@ public class AddressService {
     // Sửa thông tin địa chỉ trong database
     public void updateAddress(Address address) throws SQLException {
         String query = "UPDATE Addresses SET province=?, city=?, district=?, street=? WHERE id=?";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, address.getProvince());
             preparedStatement.setString(2, address.getCity());
             preparedStatement.setString(3, address.getDistrict());
@@ -89,7 +94,7 @@ public class AddressService {
     // Xóa địa chỉ từ database
     public void deleteAddress(long addressId) throws SQLException {
         String query = "DELETE FROM Addresses WHERE id=?";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setLong(1, addressId);
             preparedStatement.executeUpdate();
         }
@@ -99,7 +104,7 @@ public class AddressService {
     public List<Address> getAllAddresses() throws SQLException {
         List<Address> addresses = new ArrayList<>();
         String query = "SELECT * FROM Addresses";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query);
+        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query);
                 ResultSet resultSet = preparedStatement.executeQuery()) {
             while (resultSet.next()) {
                 Address address = new Address();
@@ -118,7 +123,7 @@ public class AddressService {
     public Address getAddressById(int addressId) throws SQLException {
         Address address = null;
         String query = "SELECT * FROM Addresses WHERE id=?";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setLong(1, addressId);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
