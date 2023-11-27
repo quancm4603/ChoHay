@@ -63,7 +63,7 @@ public class CreateProductController extends HttpServlet {
             String category = request.getParameter("category");
             int price = Integer.parseInt(request.getParameter("price"));
             String phone = request.getParameter("phone");
-            Part image = request.getPart("image");
+            
             String province = request.getParameter("province");
             String city = request.getParameter("city");
             String district = request.getParameter("district");
@@ -114,8 +114,9 @@ public class CreateProductController extends HttpServlet {
             product.setDescription(description);
 
             // xu ly image
+            Part image = request.getPart("image");
             // path folder chua anh
-            String folderSaveFile = "/images/products/" + userId;
+            String folderSaveFile = "/images";
             String pathUpload = request.getServletContext().getRealPath(folderSaveFile);
             // file name user upload
             String fileName = Paths.get(image.getSubmittedFileName()).getFileName().toString();

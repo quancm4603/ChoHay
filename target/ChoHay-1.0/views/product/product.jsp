@@ -56,7 +56,7 @@
                         <div style="position: relative;">
                             <div style="width: 100%;padding-bottom: 100%;position: relative;height: 397.1px;width: 100%;padding-bottom: 100%;position: relative;display: block;height: 0;padding-bottom: 90%;position: relative;overflow: hidden;">
                                 <picture>
-                                    <img style="display: block;object-fit: contain;object-position: center;width: 100%;width: 100%;max-width: 100%;height: auto;position: absolute;" src=".<%=product.getImage()%>">
+                                    <img style="display: block;object-fit: contain;object-position: center;width: 100%;width: 100%;max-width: 100%;height: auto;position: absolute;" src="../../assets/img/iphone6.jpg">
                                 </picture>
                             </div>
                         </div>
