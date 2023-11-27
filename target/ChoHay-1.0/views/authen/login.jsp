@@ -51,7 +51,7 @@
                                         <div class="form-check"><input name="remember" class="form-check-input" type="checkbox" id="formCheck-1" style="border: 1.90566px solid rgb(15,14,14) ;"><label class="form-check-label" for="formCheck-1">Ghi nhớ đăng nhập</label></div>
                                     </div>
                                     <div class="mb-3" style="width: 100%;"><button class="btn btn-primary d-block w-100" type="submit">Login</button></div>
-                                    <p class="text-muted" style="text-align: left;color: #55595c;width: 100%;">Chưa có tài khoản?&nbsp;<a style="color: rgba(26,26,26,0.58);" href="register.html">Đăng ký tài khoản mới</a></p><a style="color: rgba(26,26,26,0.58);">Quên mật khẩu?</a>
+                                    <p class="text-muted" style="text-align: left;color: #55595c;width: 100%;">Chưa có tài khoản?&nbsp;<a style="color: rgba(26,26,26,0.58);" href="./register">Đăng ký tài khoản mới</a></p><a href="./forget-password" style="color: rgba(26,26,26,0.58);">Quên mật khẩu?</a>
                                 </form>
                             </div>
                         </div>

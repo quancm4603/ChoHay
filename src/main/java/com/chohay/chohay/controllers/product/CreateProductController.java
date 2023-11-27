@@ -149,6 +149,9 @@ public class CreateProductController extends HttpServlet {
             ProductService productService = ProductServiceSingleton.getInstance();
             productService.addProduct(product);
             
+            addressService.closeConnection();
+            productService.closeConnection();
+            
             response.sendRedirect("./");
             
             
