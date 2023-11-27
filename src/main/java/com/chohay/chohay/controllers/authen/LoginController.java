@@ -67,6 +67,7 @@ public class LoginController extends HttpServlet {
                     response.addCookie(passwordCookie);
                     
                 }
+                userService.closeConnection();
                 
                 response.sendRedirect("./");
             }else{
