@@ -131,6 +131,24 @@ public class UserService {
         }
         return user;
     }
+    
+    // Lấy shop details
+    public User getUserDetailsById(int userId) throws SQLException {
+        User user = null;
+        String query = "SELECT * FROM Users WHERE id=?";
+        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, userId);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    user = extractUserFromResultSet(resultSet);
+                    user.setUsername(null);
+                    user.setPassword(null);
+                    user.setEmail(null);
+                }
+            }
+        }
+        return user;
+    }
 
     // Lấy người dùng từ database dựa trên username OR email
     public User getUserByUserNameOrEmail(String username) throws SQLException {
