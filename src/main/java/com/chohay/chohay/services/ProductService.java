@@ -5,7 +5,10 @@
 package com.chohay.chohay.services;
 
 import com.chohay.chohay.models.Product;
+import com.chohay.chohay.models.details.ApartmentDetails;
 import com.chohay.chohay.models.details.Details;
+import com.chohay.chohay.models.details.DogDetails;
+import com.chohay.chohay.models.details.PhoneDetails;
 import com.google.gson.Gson;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -21,7 +24,6 @@ import java.util.List;
  */
 public class ProductService {
 
-
     // Database connection parameters
     private String jdbcURL = "jdbc:mysql://localhost:3306/chohay";
     private String jdbcUsername = "root";
@@ -29,7 +31,7 @@ public class ProductService {
 
     public ProductService() {
     }
-    
+
     private Connection getConnection() throws SQLException {
         Connection connection = null;
         try {
@@ -40,7 +42,6 @@ public class ProductService {
         }
         return connection;
     }
-    
 
     // Close the database connection
     public void closeConnection() {
@@ -67,9 +68,9 @@ public class ProductService {
             preparedStatement.setInt(7, product.getAddressId());
             preparedStatement.setString(8, product.getCategory());
             preparedStatement.setString(9, product.getDetails().toJson());
-            
+
             int affectedRows = preparedStatement.executeUpdate();
-            
+
             if (affectedRows == 0) {
                 throw new SQLException("Thêm địa chỉ không thành công, không có hàng nào được tạo ra.");
             }
@@ -99,6 +100,37 @@ public class ProductService {
         return products;
     }
 
+    public Product getProductById(int productId) throws SQLException {
+        Product product = null;
+        String query = "SELECT * FROM Products WHERE id = ?";
+        try (Connection connection = getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, productId);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    product = extractProductFromResultSet(resultSet);
+                }
+            }
+        }
+        return product;
+    }
+
+    public List<Product> getProductsByKeyword(String keyword) throws SQLException {
+        List<Product> products = new ArrayList<>();
+        String query = "SELECT * FROM Products WHERE name LIKE ?";
+        try (Connection connection = getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, "%" + keyword + "%");
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    Product product = extractProductFromResultSet(resultSet);
+                    products.add(product);
+                }
+            }
+        }
+        return products;
+    }
+
     // Phương thức hỗ trợ để chuyển dữ liệu từ ResultSet thành đối tượng User
     private Product extractProductFromResultSet(ResultSet resultSet) throws SQLException {
         Product product = new Product();
@@ -112,7 +144,15 @@ public class ProductService {
         product.setAddressId(resultSet.getInt("address_id"));
         product.setCategory(resultSet.getString("category"));
         Gson gson = new Gson();
-        product.setDetails(gson.fromJson(resultSet.getString("details"), Details.class));
+        if (product.getCategory().equals("Phone")) {
+            product.setDetails(gson.fromJson(resultSet.getString("details"), PhoneDetails.class));
+        }
+        if (product.getCategory().equals("Apartment")) {
+            product.setDetails(gson.fromJson(resultSet.getString("details"), ApartmentDetails.class));
+        }
+        if (product.getCategory().equals("Dog")) {
+            product.setDetails(gson.fromJson(resultSet.getString("details"), DogDetails.class));
+        }
         return product;
     }
 

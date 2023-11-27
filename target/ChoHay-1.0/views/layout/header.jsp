@@ -26,7 +26,10 @@
                 </ul>
                 <ul class="navbar-nav" style="width: 50%;">
                     <li class="nav-item" style="width: 100%;">
-                        <div class="input-group me-auto mb-3" style="margin: 0px;width: 100%;height: 30px;"><input class="form-control form-control" type="text" placeholder="Tìm kiếm sản phẩm trên Chợ Hay" aria-label="Search" aria-describedby="button-addon2" style="height: 35px;color: rgb(0,0,0);border-width: 1px;border-color: rgba(0,0,0,0.35);width: 60%;"><button class="btn btn-outline-secondary" type="button" id="button-addon-1" style="height: 35px;padding: 4px 24px;border-style: solid;backdrop-filter: opacity(1);width: 30%;">Tìm kiếm</button></div>
+                        <form method="get" action="./search" class="input-group me-auto mb-3" style="margin: 0px;width: 100%;height: 30px;">
+                            <input name="keyword" class="form-control form-control" type="text" placeholder="Tìm kiếm sản phẩm trên Chợ Hay" aria-label="Search" aria-describedby="button-addon2" style="height: 35px;color: rgb(0,0,0);border-width: 1px;border-color: rgba(0,0,0,0.35);width: 60%;">
+                            <button class="btn btn-outline-secondary" type="submit" id="button-addon-1" style="height: 35px;padding: 4px 24px;border-style: solid;backdrop-filter: opacity(1);width: 30%;">Tìm kiếm</button>
+                        </form>
                     </li>
                 </ul>
                 <ul class="navbar-nav ms-auto" style="width: 30%;margin-left: -7.4219px;height: 100%;">
