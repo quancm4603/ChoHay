@@ -36,21 +36,17 @@
                     <%
                         if (session != null && session.getAttribute("user") != null) {
                     %>
-                    <li class="nav-item" style="width: 45%;height: 100%;margin-right: 0px;">
-                        <a class="btn btn-dark text-center" role="button" style="padding: 0;padding-top: 10px;padding-bottom: 10px;border-width: 1px;height: 100%;width: 100%;margin: 0px;font-size: 14px;line-height: 20px;letter-spacing: 1px;" href="./create-product">Đăng tin</a>
-                    </li>
-                    <li class="nav-item" style="width: 45%;height: 100%;">
-                        <a class="btn btn-dark text-center" role="button" style="padding: 0;padding-top: 10px;padding-bottom: 10px;border-width: 1px;height: 100%;width: 100%;margin: 0px;font-size: 14px;line-height: 20px;letter-spacing: 1px;" href="./logout">Đăng xuất</a>
-                    </li>
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="btn btn-outline-primary" role="button" href="./create-product" style="padding-top: 10px;padding-bottom: 10px;width: 143px;/*margin-bottom: 0px;*//*margin-top: 0px;*/">đăng tin</a></li>
+                        <li class="nav-item"><a class="btn btn-primary" role="button" href="./logout" style="width: 143px;">đăng xuất</a></li>
+                    </ul>
                     <%
                     } else {
                     %>
-                    <li class="nav-item" style="width: 45%;height: 100%;margin-right: 0px;">
-                        <a class="btn btn-dark text-center" role="button" style="padding: 0;padding-top: 10px;padding-bottom: 10px;border-width: 1px;height: 100%;width: 100%;margin: 0px;font-size: 14px;line-height: 20px;letter-spacing: 1px;" href="./create-product">Đăng tin</a>
-                    </li>
-                    <li class="nav-item" style="width: 45%;height: 100%;">
-                        <a class="btn btn-dark text-center" role="button" style="padding: 0;padding-top: 10px;padding-bottom: 10px;border-width: 1px;height: 100%;width: 100%;margin: 0px;font-size: 14px;line-height: 20px;letter-spacing: 1px;" href="./login">Đăng nhập</a>
-                    </li>
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="btn btn-outline-primary" role="button" href="./create-product" style="padding-top: 10px;padding-bottom: 10px;width: 143px;/*margin-bottom: 0px;*//*margin-top: 0px;*/">đăng tin</a></li>
+                        <li class="nav-item"><a class="btn btn-primary" role="button" href="./login" style="width: 143px;">đăng nhập</a></li>
+                    </ul>
                     <%
                         }
                     %>

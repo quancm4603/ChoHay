@@ -6,8 +6,6 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
-<script src="assets/bootstrap/js/bootstrap.min.js"></script>
-<script src="assets/js/script.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
-<script src="assets/js/address.js"></script>
-<script src="assets/js/confimpassword.js"></script>
+<script src="https://raw.githubusercontent.com/quancm4603/ChoHayFrontEnd/main/assets/js/script.min.js"></script>

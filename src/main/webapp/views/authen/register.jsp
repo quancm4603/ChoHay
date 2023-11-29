@@ -13,15 +13,17 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
         <title>Đăng ký vào Chợ Hay</title>
-        <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;300;400;500;600;700&amp;display=swap">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Averia+Serif+Libre&amp;display=swap">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.2/dist/lux/bootstrap.min.css">
-        <link rel="stylesheet" href="assets/css/styles.min.css">
+        <%@include file="../resources/style.jsp" %>
+        <!--        <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+                <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;300;400;500;600;700&amp;display=swap">
+                <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Averia+Serif+Libre&amp;display=swap">
+                <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.2/dist/lux/bootstrap.min.css">
+                <link rel="stylesheet" href="assets/css/styles.min.css">-->
     </head>
 
     <body>
+        <%@include file="../layout/header.jsp" %>
         <section class="position-relative py-4 py-xl-5">
             <div class="container">
                 <div class="row mb-4" style="padding-bottom: 0px;padding-top: 0px;">
@@ -90,9 +92,8 @@
                 </div>
             </div>
         </section>
-        <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-        <script src="assets/js/script.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+        <%@include file="../layout/footer.jsp" %>
+        <%@include file="../resources/script.jsp" %>
         <script>
             function checkPassword() {
                 var password = document.getElementById("password").value;
