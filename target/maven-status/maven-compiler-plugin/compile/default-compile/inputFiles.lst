@@ -6,7 +6,9 @@ D:\FPT\SE sem4\PRJ\final-project\ChoHay\src\main\java\com\chohay\chohay\models\U
 D:\FPT\SE sem4\PRJ\final-project\ChoHay\src\main\java\com\chohay\chohay\models\details\HouseDetails.java
 D:\FPT\SE sem4\PRJ\final-project\ChoHay\src\main\java\com\chohay\chohay\models\details\PetDetails.java
 D:\FPT\SE sem4\PRJ\final-project\ChoHay\src\main\java\com\chohay\chohay\models\details\TabletsDetails.java
+D:\FPT\SE sem4\PRJ\final-project\ChoHay\src\main\java\com\chohay\chohay\services\ProductServiceSingleton.java
 D:\FPT\SE sem4\PRJ\final-project\ChoHay\src\main\java\com\chohay\chohay\services\UserService.java
+D:\FPT\SE sem4\PRJ\final-project\ChoHay\src\main\java\com\chohay\chohay\controllers\home\SearchController.java
 D:\FPT\SE sem4\PRJ\final-project\ChoHay\src\main\java\com\chohay\chohay\filters\EncodingFilter.java
 D:\FPT\SE sem4\PRJ\final-project\ChoHay\src\main\java\com\chohay\chohay\models\Product.java
 D:\FPT\SE sem4\PRJ\final-project\ChoHay\src\main\java\com\chohay\chohay\filters\LoginFilter.java
@@ -15,6 +17,11 @@ D:\FPT\SE sem4\PRJ\final-project\ChoHay\src\main\java\com\chohay\chohay\services
 D:\FPT\SE sem4\PRJ\final-project\ChoHay\src\main\java\com\chohay\chohay\models\details\AirConditionerDetails.java
 D:\FPT\SE sem4\PRJ\final-project\ChoHay\src\main\java\com\chohay\chohay\models\details\ElectroniceDeviceDetails.java
 D:\FPT\SE sem4\PRJ\final-project\ChoHay\src\main\java\com\chohay\chohay\models\details\PhoneDetails.java
+D:\FPT\SE sem4\PRJ\final-project\ChoHay\src\main\java\com\chohay\chohay\controllers\authen\RegisterController.java
+D:\FPT\SE sem4\PRJ\final-project\ChoHay\src\main\java\com\chohay\chohay\controllers\product\CreateProductFireBaseController.java
+D:\FPT\SE sem4\PRJ\final-project\ChoHay\src\main\java\com\chohay\chohay\services\UserServiceSingleton.java
+D:\FPT\SE sem4\PRJ\final-project\ChoHay\src\main\java\com\chohay\chohay\services\AddressServiceSingleton.java
+D:\FPT\SE sem4\PRJ\final-project\ChoHay\src\main\java\com\chohay\chohay\controllers\product\ProductController.java
 D:\FPT\SE sem4\PRJ\final-project\ChoHay\src\main\java\com\chohay\chohay\models\details\MotelRoomDetails.java
 D:\FPT\SE sem4\PRJ\final-project\ChoHay\src\main\java\com\chohay\chohay\models\details\HousewareDetails.java
 D:\FPT\SE sem4\PRJ\final-project\ChoHay\src\main\java\com\chohay\chohay\controllers\authen\LogoutController.java

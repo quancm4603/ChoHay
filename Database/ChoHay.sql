@@ -21,7 +21,7 @@ CREATE TABLE `Users`(
                         `address_id` BIGINT UNSIGNED NOT NULL,
                         `full_name` VARCHAR(64) NOT NULL,
                         `role` SMALLINT UNSIGNED NOT NULL,
-                        `avatar` VARCHAR(255) NOT NULL
+                        `avatar` VARCHAR(1000) NOT NULL
 );
 
 CREATE TABLE `Products`(
@@ -30,7 +30,7 @@ CREATE TABLE `Products`(
                            `name` VARCHAR(255) NOT NULL,
                            `price` BIGINT NOT NULL,
                            `description` TEXT NOT NULL,
-                           `image` VARCHAR(255) NOT NULL,
+                           `image` VARCHAR(1000) NOT NULL,
                            `phone` CHAR(10) NOT NULL,
                            `address_id` BIGINT UNSIGNED NOT NULL,
                            `category` VARCHAR(32) NOT NULL,
