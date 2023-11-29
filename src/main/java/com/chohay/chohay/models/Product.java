@@ -9,7 +9,7 @@ package com.chohay.chohay.models;
  * @author caomi
  */
 import com.chohay.chohay.models.details.Details;
-import com.google.gson.Gson;
+import java.text.DecimalFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -39,5 +39,10 @@ public class Product {
     private int addressId;
     private String category;
     private Details details;
+    
+    public String getPriceToString() {
+        DecimalFormat decimalFormat = new DecimalFormat("###,###");
+        return decimalFormat.format(price);
+    }
     
 }
