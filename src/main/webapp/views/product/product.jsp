@@ -21,11 +21,11 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
         <title><%=product.getName()%></title>
-        <%@include file="../resources/style.jsp" %>
+        <%@include file="views/resources/style.jsp" %>
     </head>
 
     <body>
-        <%@include file="../layout/header.jsp" %>
+        <%@include file="views/layout/header.jsp" %>
 
 
         <div class="container" style="background: #ffffff;padding-top: 0px;margin-top: 15px;margin-bottom: 15px;">
@@ -55,8 +55,11 @@
                     <div style="width: 100%;flex-direction: column;">
                         <div style="position: relative;">
                             <div style="width: 100%;padding-bottom: 100%;position: relative;height: 397.1px;width: 100%;padding-bottom: 100%;position: relative;display: block;height: 0;padding-bottom: 90%;position: relative;overflow: hidden;">
-                                <picture>
-                                    <img style="display: block;object-fit: contain;object-position: center;width: 100%;width: 100%;max-width: 100%;height: auto;position: absolute;" src=".<%=product.getImage()%>">
+                                <!--                                <picture>
+                                                                    <img style="display: block;object-fit: contain;object-position: center;width: 100%;width: 100%;max-width: 100%;height: auto;position: absolute;" src="<%=product.getImage()%>">
+                                                                </picture>-->
+                                <picture style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+                                    <img style="display: block; object-fit: contain; object-position: center; width: 100%; height: 100%; max-width: 100%;" src="<%=product.getImage()%>" alt="Product Image">
                                 </picture>
                             </div>
                         </div>
@@ -133,8 +136,8 @@
             </div>
         </div>
         <!--bodyhere-->
-        <%@include file="../layout/footer.jsp" %>
-        <%@include file="../resources/script.jsp" %>
+        <%@include file="views/layout/footer.jsp" %>
+        <%@include file="views/resources/script.jsp" %>
     </body>
 
 </html>
