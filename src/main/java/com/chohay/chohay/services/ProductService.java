@@ -156,4 +156,20 @@ public class ProductService {
         return product;
     }
 
+    public List<Product> getNumberOfProducts(int limit) throws SQLException {
+        List<Product> products = new ArrayList<>();
+        String query = "SELECT * FROM Products LIMIT ?";
+        try (Connection connection = getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, limit);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    Product product = extractProductFromResultSet(resultSet);
+                    products.add(product);
+                }
+            }
+        }
+        return products;
+    }
+
 }
