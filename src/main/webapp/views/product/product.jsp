@@ -21,11 +21,11 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
         <title><%=product.getName()%></title>
-        <%@include file="views/resources/style.jsp" %>
+        <%@include file="../../views/resources/style.jsp" %>
     </head>
 
     <body>
-        <%@include file="views/layout/header.jsp" %>
+        <%@include file="../../views/layout/header.jsp" %>
 
 
         <div class="container" style="background: #ffffff;padding-top: 0px;margin-top: 15px;margin-bottom: 15px;">
@@ -66,7 +66,7 @@
                     </div>
                     <div>
                         <h3 class="my-3" style="font-size: 30px;"><%=product.getName()%></h3>
-                        <p style="font-weight: bold;color: rgb(0,0,0);font-size: 25px;">đ 50.000.000</p>
+                        <p style="font-weight: bold;color: rgb(0,0,0);font-size: 25px;">đ <%=product.getPriceToString()%></p>
                         <div style="margin: 50px 0 0 0;width: 100%;">
                             <h2 style="font-weight: bold;font-size: 25px;">Chi tiết sản phẩm</h2>
                             <p style="color: rgb(0,0,0);font-size: 18px;"><%=product.getDescription()%></p>
@@ -97,9 +97,14 @@
                         <div class="row">
                             <div class="col-md-5 col-lg-6" style="padding: 5px 0 0 0;display: flex;width: 100%;height: 80.1px;">
                                 <span style="box-sizing: border-box;display: block;width: 25%;height: initial;background: none;opacity: 1;border: 0px;margin: 0px;padding: 0px;max-width: 100%;">
-                                    <img src=".<%=shop.getAvatar()%>" style="border-radius: 50%;display: block;max-width: 100%;width: initial;height: initial;background: none;opacity: 1;border: 0px;padding: 0px;">
+                                    <img src="<%=shop.getAvatar()%>" style="border-radius: 50%;display: block;max-width: 100%;width: initial;height: initial;background: none;opacity: 1;border: 0px;padding: 0px;">
                                 </span>
-                                <div style="width: 100%;display: flex;"><span style="font-size: 19px;font-weight: bold;margin: 0px;"><%=shop.getFullName()%></span><button class="btn btn-primary" type="button" style="border-radius: 4px;background-color: #fff;color: #000;border: 1px solid silver;min-width: 96px!important;height: 24px!important;font-size: 15px!important;line-height: 12px;display: flex!important;justify-content: center;align-items: center;text-align: right;margin: 0 0 0 80px;">Xem trang</button></div>
+                                <div style="width: 100%;display: flex;"><span style="font-size: 19px;font-weight: bold;margin: 0px;"><%=shop.getFullName()%></span>
+                                    <form action="./shop" method="post">
+                                        <input name="shopId" value="<%=shop.getId()%>" type="hidden">
+                                        <button class="btn btn-primary" type="submit" style="border-radius: 4px;background-color: #fff;color: #000;border: 1px solid silver;min-width: 96px!important;height: 24px!important;font-size: 15px!important;line-height: 12px;display: flex!important;justify-content: center;align-items: center;text-align: right;margin: 0 0 0 80px;">Xem trang</button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                         <div class="row" style="padding: 15px 0 0 0;">
@@ -136,8 +141,8 @@
             </div>
         </div>
         <!--bodyhere-->
-        <%@include file="views/layout/footer.jsp" %>
-        <%@include file="views/resources/script.jsp" %>
+        <%@include file="../../views/layout/footer.jsp" %>
+        <%@include file="../../views/resources/script.jsp" %>
     </body>
 
 </html>
