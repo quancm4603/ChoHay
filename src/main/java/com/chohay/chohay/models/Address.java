@@ -33,4 +33,7 @@ public class Address {
     private String district;
     private String street;
     
+    public String getAddress(){
+        return province + ", " + city + ", " + district + ", " + street;
+    }
 }

@@ -12,7 +12,6 @@ import java.util.List;
 
 public class UserService {
 
-
     // Database connection parameters
     private String jdbcURL = "jdbc:mysql://localhost:3306/chohay";
     private String jdbcUsername = "root";
@@ -20,7 +19,7 @@ public class UserService {
 
     public UserService() {
     }
-    
+
     private Connection getConnection() throws SQLException {
         Connection connection = null;
         try {
@@ -57,7 +56,7 @@ public class UserService {
             preparedStatement.setString(6, user.getFullName());
             preparedStatement.setInt(7, user.getRole());
             preparedStatement.setString(8, user.getAvatar());
-            
+
             int affectedRows = preparedStatement.executeUpdate();
             if (affectedRows == 0) {
                 throw new SQLException("Thêm địa chỉ không thành công, không có hàng nào được tạo ra.");
@@ -131,7 +130,7 @@ public class UserService {
         }
         return user;
     }
-    
+
     // Lấy shop details
     public User getUserDetailsById(int userId) throws SQLException {
         User user = null;
@@ -148,6 +147,20 @@ public class UserService {
             }
         }
         return user;
+    }
+
+    public String getFullNameById(int userId) throws SQLException {
+        String fullName = null;
+        String query = "SELECT full_name FROM Users WHERE id=?";
+        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, userId);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    fullName = resultSet.getString("full_name");
+                }
+            }
+        }
+        return fullName;
     }
 
     // Lấy người dùng từ database dựa trên username OR email
