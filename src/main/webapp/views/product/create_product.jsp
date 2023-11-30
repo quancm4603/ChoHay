@@ -71,14 +71,6 @@
                                         </div>
                                     </div>
                                     <div class="row" style="width: 100%;margin: 2px;padding: 0;">
-                                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6" style="transform:scale(1);">
-                                            <div class="mb-3"><label class="form-label form-label" for="service_name" style="color: #55595c;font-weight: bold;"><strong>Số điện thoại *</strong></label><input class="form-control form-control" type="tel" id="service_name-1" name="phone" placeholder="Số điện thoại" required="" style="border-color: rgb(0,0,0);color: rgb(0,0,0);width: 100%;"></div>
-                                        </div>
-                                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
-                                            <div class="mb-3"><label class="form-label form-label form-label" for="image" style="font-weight: bold;"><strong>Hình ảnh *</strong></label><input class="form-control form-control" type="file" id="image" name="image" placeholder="Hình ảnh" required="" style="width: 100%;"></div>
-                                        </div>
-                                    </div>
-                                    <div class="row" style="width: 100%;margin: 2px;padding: 0;">
                                         <div class="col">
                                             <div style="margin-bottom: 10px;">
                                                 <label class="form-label form-label" style="color:#55595c;font-weight:bold;">Tỉnh, thành phố *</label>

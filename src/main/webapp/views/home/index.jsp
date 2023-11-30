@@ -54,12 +54,12 @@
                             </div>
                             <div class="AdBody_footer__78mtV">
                                 <a rel="noopener noreferrer" target="_blank">
-                                    <img class="commonStyle_image__2y3kd commonStyle_round__3k7wj" height="16" width="16" src="https://static.chotot.com/storage/chotot-icons/svg/user.svg" alt="Tony Tèo">
+                                    <img class="commonStyle_image__2y3kd commonStyle_round__3k7wj" height="16" width="16" src="https://static.chotot.com/storage/chotot-icons/svg/user.svg" alt="<%=product.getUsername()%>">
                                 </a>
                                 <div class="commonStyle_deviderWrapper__3FHXZ" style="margin-right:5px;"></div>
-                                <div class="AdBody_adItemPostedTime__Oj7pr"><span class="AdBody_text__vR5s0">12 giờ trước</span></div>
+                                <div class="AdBody_adItemPostedTime__Oj7pr"><span class="AdBody_text__vR5s0"><%=product.getTimeDifference()%></span></div>
                                 <div class="commonStyle_deviderWrapper__3FHXZ" style="margin-right:5px;"></div>
-                                <span class="AdBody_adItemPostedTime__Oj7pr AdBody_location__ujScT"><span class="AdBody_text__vR5s0">Đồng Nai</span></span>
+                                <span class="AdBody_adItemPostedTime__Oj7pr AdBody_location__ujScT"><span class="AdBody_text__vR5s0"><%=product.getAddress()%></span></span>
                             </div>
                         </div>
                     </div>
