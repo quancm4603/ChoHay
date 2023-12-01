@@ -8,6 +8,7 @@ package com.chohay.chohay.models;
  *
  * @author caomi
  */
+import java.text.DecimalFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -40,5 +41,39 @@ public class Order {
     private String receiverStreet;
     private int status;
     private String customerComment;
+    
+    //more details
+    
+    private String sellerName;
+    private String sellerPhone;
+    private String sellerAddress;
+    private String productName;
+    private String productImage;
+    private long price;
+
+    public Order(int id, int productId, int sellerId, int customerId, String receiverName, String receiverPhone, String receiverEmail, String receiverProvince, String receiverCity, String receiverDistrict, String receiverStreet, int status, String customerComment) {
+        this.id = id;
+        this.productId = productId;
+        this.sellerId = sellerId;
+        this.customerId = customerId;
+        this.receiverName = receiverName;
+        this.receiverPhone = receiverPhone;
+        this.receiverEmail = receiverEmail;
+        this.receiverProvince = receiverProvince;
+        this.receiverCity = receiverCity;
+        this.receiverDistrict = receiverDistrict;
+        this.receiverStreet = receiverStreet;
+        this.status = status;
+        this.customerComment = customerComment;
+    }
+    
+    public String getAddressToString(){
+        return receiverProvince + ", " + receiverCity + ", " + receiverDistrict;
+    }
+    
+    public String getPriceToString() {
+        DecimalFormat decimalFormat = new DecimalFormat("###,###");
+        return decimalFormat.format(price);
+    }
     
 }

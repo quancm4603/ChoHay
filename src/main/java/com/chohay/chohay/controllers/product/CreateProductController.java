@@ -61,7 +61,7 @@ public class CreateProductController extends HttpServlet {
 
             String name = request.getParameter("name");
             String category = request.getParameter("category");
-            int price = Integer.parseInt(request.getParameter("price"));
+            long price = Long.parseLong(request.getParameter("price"));
             String phone = request.getParameter("phone");
             
             String province = request.getParameter("province");
