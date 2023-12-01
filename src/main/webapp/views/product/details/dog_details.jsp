@@ -11,17 +11,17 @@
         <div class="mb-3">
             <label class="form-label form-label" for="service_name"><strong>Giống chó *</strong></label>
             <select name="breed" class="form-select form-select" required="" style="color:rgb(0,0,0);">
-                <option value="Alaskan dog">Chó Alaska</option>
-                <option value="Beijin dog">Chó Bắc Kinh</option>
-                <option value="Becgie dog">Chó Becgie</option>
-                <option value="Bull dog">Chó Bull</option>
-                <option value="Chihuahua dog">Chó Chihuahua</option>
-                <option value="Chow Chow  dog">Chó Chow Chow</option>
-                <option value="Corgi dog">Chó Corgi</option>
-                <option value="Shiba dog">Chó Shiba</option>
-                <option value="Poodle dog">Chó Poodle</option>
-                <option value="Husky dog">Chó Husky</option>
-                <option value="Other">Giống khác</option>
+                <option value="Chó Alaska">Chó Alaska</option>
+                <option value="Chó Bắc Kinh">Chó Bắc Kinh</option>
+                <option value="Chó Becgie">Chó Becgie</option>
+                <option value="Chó Bull">Chó Bull</option>
+                <option value="Chó Chihuahua">Chó Chihuahua</option>
+                <option value="Chó Chow Chow">Chó Chow Chow</option>
+                <option value="Chó Corgi">Chó Corgi</option>
+                <option value="Chó Shiba">Chó Shiba</option>
+                <option value="Chó Poodle">Chó Poodle</option>
+                <option value="Chó Husky">Chó Husky</option>
+                <option value="Giống khác">Giống khác</option>
             </select>
         </div>
     </div>

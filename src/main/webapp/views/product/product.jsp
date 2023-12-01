@@ -4,6 +4,7 @@
     Author     : caomi
 --%>
 
+<%@page import="com.chohay.chohay.models.details.PhoneDetails"%>
 <%@page import="com.chohay.chohay.models.User"%>
 <%@page import="com.chohay.chohay.models.Address"%>
 <%@page import="com.chohay.chohay.models.Product"%>
@@ -13,6 +14,16 @@
     Product product = (Product) request.getAttribute("product");
     Address address = (Address) request.getAttribute("address");
     User shop = (User) request.getAttribute("shop");
+    String subCategory1 = null;
+    subCategory1 = product.getCategory().equals("Apartment") ? "Bất động sản"
+            : (product.getCategory().equals("Phone") ? "Đồ điện tử"
+            : (product.getCategory().equals("Dog") ? "Thú cưng" : null));
+
+    String subCategory2 = null;
+    subCategory2 = product.getCategory().equals("Apartment") ? "Căn hộ"
+            : (product.getCategory().equals("Phone") ? "Điện thoại"
+            : (product.getCategory().equals("Dog") ? "Chó" : null));
+
 %>
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
@@ -35,14 +46,14 @@
                     <span style="font-weight: bold;margin: 5px;">
                         <span style="font-weight: normal !important; color: rgb(32, 33, 36);">»</span>
                     </span>
-                    <!--layout-->
+                    <!--layout DONE-->
                     <a href="#" style="text-decoration: none;font-weight: bold;">
-                        <span>Đồ điện tử</span>
+                        <span><%=subCategory1%></span>
                     </a>
                     <span style="font-weight: bold;margin: 5px;">
                         <span style="font-weight: normal !important; color: rgb(32, 33, 36);">»</span>
                     </span><a href="#" style="font-weight: bold;text-decoration: none;">
-                        <span>Điện thoại</span></a>
+                        <span><%=subCategory2%></span></a>
                     <span style="font-weight: bold;margin: 5px;">
                         <span style="font-weight: normal !important; color: rgb(32, 33, 36);">»</span>
                     </span>
@@ -55,9 +66,6 @@
                     <div style="width: 100%;flex-direction: column;">
                         <div style="position: relative;">
                             <div style="width: 100%;padding-bottom: 100%;position: relative;height: 397.1px;width: 100%;padding-bottom: 100%;position: relative;display: block;height: 0;padding-bottom: 90%;position: relative;overflow: hidden;">
-                                <!--                                <picture>
-                                                                    <img style="display: block;object-fit: contain;object-position: center;width: 100%;width: 100%;max-width: 100%;height: auto;position: absolute;" src="<%=product.getImage()%>">
-                                                                </picture>-->
                                 <picture style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
                                     <img style="display: block; object-fit: contain; object-position: center; width: 100%; height: 100%; max-width: 100%;" src="<%=product.getImage()%>" alt="Product Image">
                                 </picture>
@@ -73,18 +81,28 @@
                         </div>
                     </div>
                     <div class="row">
+
+                        <%
+                            if(product.getCategory().equals("Phone")){
+                        %>
                         <!--layout-->
-                        <div class="col">
-                            <div style="padding: 10px 0;"><span style="font-size: 20px;font-weight: bold;">* Tình trạng: Mới</span></div>
-                            <div style="padding: 10px 0;"><span style="font-size: 20px;font-weight: bold;">* Màu sắc: Đen</span></div>
-                            <div style="padding: 10px 0;"><span style="font-size: 20px;font-weight: bold;">* Chính sách bảo hành: 12 tháng</span></div>
-                        </div>
-                        <div class="col">
-                            <div style="padding: 10px 0;"><span style="font-size: 20px;font-weight: bold;">* Hãng: Apple</span></div>
-                            <div style="padding: 10px 0;font-size: 20px;"><span style="font-weight: bold;">* Dung lượng: 8GB</span></div>
-                            <div style="padding: 10px 0;"><span style="font-size: 20px;font-weight: bold;">* Xuất xứ: USA</span></div>
-                        </div>
+                        <%@include file="details/Phone.jsp" %>
+                        <%
+                            } else if(product.getCategory().equals("Apartment")){
+                        %>
                         <!--layout-->
+                        <%@include file="details/Apartment.jsp" %>
+                        
+                        <%
+                            } else if(product.getCategory().equals("Dog")){
+                        %>
+                        <!--layout-->
+                        <%@include file="details/Dog.jsp" %>
+                        
+                        <%
+                            } 
+                        %>
+                        
                     </div>
                     <div style="padding: 10px 0;text-align: center;font-size: 25px;">
                         <div style="text-align: left;"><span style="font-size: 20px;font-weight: bold;border-top-style: none;border-bottom-style: solid;">Địa chỉ&nbsp;</span></div>
@@ -132,7 +150,9 @@
                         <div></div>
                     </div>
                     <div style="margin: 20px;">
+                        <a href="./create-order?id=<%=product.getId()%>">
                         <button class="btn btn-primary" type="button" style="width: 100%;color: var(--bs-btn-active-color);background: #2e9f55;font-weight: bold;height: 70px;border-radius: 4px;">Mua ngay</button>
+                        </a>
                         <button class="btn btn-primary" type="button" style="width: 100%;color: var(--bs-btn-active-color);background: #2e9f55;font-weight: bold;height: 70px;border-radius: 4px;margin: 10px 0;"><%=shop.getPhone()%></button>
                         <button class="btn btn-primary" type="button" style="width: 100%;background: var(--bs-btn-disabled-color);color: var(--bs-btn-border-color);font-weight: bold;height: 70px;border: 2px solid var(--bs-success);font-size: 80%;border-radius: 4px;margin: 10px 0;">Chat với người bán</button>
                     </div>

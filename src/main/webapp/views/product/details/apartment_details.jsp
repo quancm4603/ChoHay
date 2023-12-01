@@ -12,7 +12,7 @@
         <div class="mb-3" style="width: 100%;">
             <label class="form-label form-label" for="service_name"><strong>Loại hình căn hộ *</strong></label>
             <select name="type" class="form-select form-select" required="" style="color:rgb(0,0,0);">
-                <option value="Apartment">Chung cư</option>
+                <option value="Chung cư">Chung cư</option>
                 <option value="Duplex">Duplex</option>
                 <option value="Penthouse">Penthouse</option>
                 <option value="Officetel">Officetel</option>
@@ -36,9 +36,9 @@
         <div class="mb-3" style="width: 100%;">
             <label class="form-label form-label" for="service_name"><strong>Giấy tờ pháp lý *</strong></label>
             <select name="legalDocuments"class="form-select form-select" required="" style="color:rgb(0,0,0);" style="color: rgb(0,0,0);width: 100%;">
-                <option value="Already have house book">Đã có sổ</option>
-                <option value="waiting for house book">Đang có sổ</option>
-                <option value="Other">Giấy tờ khác</option>
+                <option value="Đã có sổ">Đã có sổ</option>
+                <option value="Đang có sổ">Đang có sổ</option>
+                <option value="Giấy tờ khác">Giấy tờ khác</option>
             </select>
         </div>
     </div>
@@ -46,9 +46,9 @@
         <div class="mb-3" style="width: 100%;">
             <label class="form-label form-label" for="service_name"><strong>Tình trạng nội thất *</strong></label>
             <select name="funiture" class="form-select form-select" required="" style="color:rgb(0,0,0);" style="color: rgb(0,0,0);width: 100%;">
-                <option value="Luxury furniture">Nội thất cao cấp</option>
-                <option value="Full furniture">Nội thất đây đủ</option>
-                <option value="No furniture">Nhà trống</option>
+                <option value="Nội thất cao cấp">Nội thất cao cấp</option>
+                <option value="Nội thất đây đủ">Nội thất đây đủ</option>
+                <option value="Nhà trống">Nhà trống</option>
             </select>
         </div>
     </div>

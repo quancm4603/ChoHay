@@ -16,6 +16,9 @@
 
     // Số lượng sản phẩm đã hiển thị
     int displayedProducts = products != null ? products.size() : 0;
+    String title = "Kết quả tìm kiếm cho ";
+    title += request.getParameter("keyword") != null ? "Kết quả tìm kiếm cho từ khóa: " + request.getParameter("keyword") : "";
+    title += request.getParameter("category") != null ? "Danh mục: " + request.getParameter("category") : "";
 %>
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
@@ -23,7 +26,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-        <title>Tìm kiếm cho "<%=request.getParameter("keyword")%>"</title>
+        <title><%=title%></title>
         <%@include file="../resources/style.jsp" %>
     </head>
 
@@ -62,11 +65,11 @@
                     <!--category bar end-->
                     <!-- ... -->
                 </div>
-                                
-                                
+
+
                 <div class="row" style="padding: 7px;padding-bottom: 0px;">
                     <div class="col" style="background: #ffffff;padding: 0px;">
-                        <p style="margin-bottom: 8px;font-size: 17px;color: rgb(0,0,0);font-weight: bold;margin-top: 8px;margin-left: 15px;">Kết quả tìm kiếm cho "<%=request.getParameter("keyword")%>"</p>
+                        <p style="margin-bottom: 8px;font-size: 17px;color: rgb(0,0,0);font-weight: bold;margin-top: 8px;margin-left: 15px;"><%=title%></p>
                     </div>
                 </div>
                 <div class="row" style="padding-top: 0px;padding-bottom: 7px;padding-right: 7px;padding-left: 7px;">

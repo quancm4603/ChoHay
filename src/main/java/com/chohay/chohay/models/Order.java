@@ -34,7 +34,10 @@ public class Order {
     private String receiverName;
     private String receiverPhone;
     private String receiverEmail;
-    private Address receiverAddress;
+    private String receiverProvince;
+    private String receiverCity;
+    private String receiverDistrict;
+    private String receiverStreet;
     private int status;
     private String customerComment;
     
