@@ -20,7 +20,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author caomi
  */
-@WebFilter(urlPatterns = {"/dang-tin", "/create-product", "/create-order"})
+@WebFilter(urlPatterns = {"/dang-tin", "/create-product", "/create-order", "/order-status"})
 public class LoginFilter implements Filter{
     
     @Override
