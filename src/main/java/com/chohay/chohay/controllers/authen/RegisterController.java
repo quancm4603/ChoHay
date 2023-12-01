@@ -41,8 +41,7 @@ public class RegisterController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-
+        request.setCharacterEncoding("UTF-8");
         try {
             // Lấy từng tham số từ form và gán cho biến String tương ứng
             String username = request.getParameter("username");

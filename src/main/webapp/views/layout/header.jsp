@@ -18,9 +18,9 @@
                     <li class="nav-item dropdown">
                         <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#" style="width: auto;">Danh mục</a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Căn hộ</a>
-                            <a class="dropdown-item" href="#">Điện thoại</a>
-                            <a class="dropdown-item" href="#">Chó</a>
+                            <a class="dropdown-item" href="./search?category=Apartment">Căn hộ</a>
+                            <a class="dropdown-item" href="./search?category=Phone">Điện thoại</a>
+                            <a class="dropdown-item" href="./search?category=Dog">Chó</a>
                         </div>
                     </li>
                 </ul>
