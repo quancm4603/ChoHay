@@ -42,6 +42,7 @@ public class Product {
     private int addressId;
     private String category;
     private Details details;
+    private int status;
 
     //other details
     private String username;

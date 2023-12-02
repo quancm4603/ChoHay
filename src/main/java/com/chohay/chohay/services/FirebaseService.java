@@ -99,5 +99,37 @@ public class FirebaseService {
             return signedUrl.toString();
     }
     
+    public void deleteImageFromUrl(String imageUrl) throws IOException {
+        // Khai báo thông tin xác thực từ file JSON của bạn
+        byte[] jsonBytes = jsonContent.getBytes(StandardCharsets.UTF_8);
+
+        // Khởi tạo GoogleCredentials từ byte array của chuỗi JSON
+        GoogleCredentials credentials = GoogleCredentials.fromStream(new ByteArrayInputStream(jsonBytes));
+
+        // Khởi tạo Firebase Storage
+        Storage storage = StorageOptions.newBuilder().setCredentials(credentials).build().getService();
+
+        // Lấy đường dẫn bucket và tên file từ URL đã cung cấp
+        String[] parts = new URL(imageUrl).getPath().split("/", 4);
+        String bucketName = parts[1];
+        String fileName = parts[3];
+
+        // Tạo đối tượng BlobId để xác định file cần xóa
+        BlobId blobId = BlobId.of(bucketName, fileName);
+
+        // Kiểm tra xem file tồn tại không trước khi xóa
+        Blob blob = storage.get(blobId);
+        if (blob != null) {
+            // Xóa file từ Firebase Storage
+            boolean deleted = storage.delete(blobId);
+            if (deleted) {
+                System.out.println("File deleted successfully from Firebase Storage.");
+            } else {
+                System.out.println("Failed to delete the file from Firebase Storage.");
+            }
+        } else {
+            System.out.println("File does not exist in Firebase Storage.");
+        }
+    }
     
 }
