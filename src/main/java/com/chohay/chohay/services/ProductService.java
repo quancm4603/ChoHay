@@ -117,7 +117,7 @@ public class ProductService {
 
     public List<Product> getProductsByKeyword(String keyword) throws SQLException {
         List<Product> products = new ArrayList<>();
-        String query = "SELECT * FROM Products WHERE name LIKE ?";
+        String query = "SELECT * FROM Products WHERE name LIKE ? AND status = 0";
         try (Connection connection = getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, "%" + keyword + "%");
@@ -133,7 +133,7 @@ public class ProductService {
 
     public List<Product> getProductsByKeywordWithPagination(String keyword, int startIndex, int limit) throws SQLException {
         List<Product> products = new ArrayList<>();
-        String query = "SELECT * FROM Products WHERE name LIKE ? LIMIT ? OFFSET ?";
+        String query = "SELECT * FROM Products WHERE name LIKE ? AND status = 0 ORDER BY updated_at DESC LIMIT ? OFFSET ?";
         try (Connection connection = getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, "%" + keyword + "%");
@@ -162,6 +162,7 @@ public class ProductService {
         product.setAddressId(resultSet.getInt("address_id"));
         product.setCategory(resultSet.getString("category"));
         product.setUpdatedAt(resultSet.getTimestamp("updated_at"));
+        product.setStatus(resultSet.getInt("status"));
         Gson gson = new Gson();
         if (product.getCategory().equals("Phone")) {
             product.setDetails(gson.fromJson(resultSet.getString("details"), PhoneDetails.class));
@@ -177,7 +178,7 @@ public class ProductService {
 
     public List<Product> getNumberOfProducts(int limit) throws SQLException {
         List<Product> products = new ArrayList<>();
-        String query = "SELECT * FROM Products LIMIT ?";
+        String query = "SELECT * FROM Products WHERE status = 0  LIMIT ?";
         try (Connection connection = getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, limit);
@@ -193,7 +194,7 @@ public class ProductService {
 
     public List<Product> getLatestProductsStartingFromN(int n, int limit) throws SQLException {
         List<Product> products = new ArrayList<>();
-        String query = "SELECT * FROM Products ORDER BY updated_at DESC LIMIT ? OFFSET ?";
+        String query = "SELECT * FROM Products WHERE status = 0 ORDER BY updated_at DESC LIMIT ? OFFSET ?";
         try (Connection connection = getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, limit);
@@ -210,7 +211,7 @@ public class ProductService {
 
     public List<Product> getCheapestProductsStartingFromN(int n, int limit) throws SQLException {
         List<Product> products = new ArrayList<>();
-        String query = "SELECT * FROM Products ORDER BY price ASC LIMIT ? OFFSET ?";
+        String query = "SELECT * FROM Products WHERE status = 0 ORDER BY price ASC LIMIT ? OFFSET ?";
         try (Connection connection = getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, limit);
@@ -227,7 +228,7 @@ public class ProductService {
 
     public List<Product> getMostExpensiveProductsStartingFromN(int n, int limit) throws SQLException {
         List<Product> products = new ArrayList<>();
-        String query = "SELECT * FROM Products ORDER BY price DESC LIMIT ? OFFSET ?";
+        String query = "SELECT * FROM Products WHERE status = 0 ORDER BY price DESC LIMIT ? OFFSET ?";
         try (Connection connection = getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, limit);
@@ -244,7 +245,7 @@ public class ProductService {
 
     public List<Product> getProductsByKeywordAndCategoryWithPagination(String keyword, String category, int startIndex, int limit) throws SQLException {
         List<Product> products = new ArrayList<>();
-        String query = "SELECT * FROM Products WHERE name LIKE ? AND category = ? LIMIT ? OFFSET ?";
+        String query = "SELECT * FROM Products WHERE name LIKE ? AND category = ? AND status = 0 ORDER BY updated_at DESC LIMIT ? OFFSET ?";
         try (Connection connection = getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, "%" + keyword + "%");
@@ -263,7 +264,7 @@ public class ProductService {
 
     public List<Product> getProductsByCategoryWithPagination(String category, int startIndex, int limit) throws SQLException {
         List<Product> products = new ArrayList<>();
-        String query = "SELECT * FROM Products WHERE category = ? LIMIT ? OFFSET ?";
+        String query = "SELECT * FROM Products WHERE category = ?  AND status = 0 ORDER BY updated_at DESC LIMIT ? OFFSET ?";
         try (Connection connection = getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, category);
@@ -277,6 +278,33 @@ public class ProductService {
             }
         }
         return products;
+    }
+
+    public List<Product> getProductsByUserId(int userId) throws SQLException {
+        List<Product> products = new ArrayList<>();
+        String query = "SELECT * FROM Products WHERE user_id = ? AND status = 0";
+        try (Connection connection = getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, userId);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    Product product = extractProductFromResultSet(resultSet);
+                    products.add(product);
+                }
+            }
+        }
+        return products;
+    }
+
+    public boolean deleteProductById(int productId) throws SQLException {
+        String query = "UPDATE Products SET status = -1 WHERE id = ?";
+        try (Connection connection = getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, productId);
+
+            int rowsAffected = preparedStatement.executeUpdate();
+            return rowsAffected > 0;
+        }
     }
 
 }
