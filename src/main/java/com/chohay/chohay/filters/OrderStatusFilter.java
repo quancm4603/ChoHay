@@ -37,8 +37,8 @@ import javax.servlet.http.HttpSession;
  * @author caomi
  */
 @WebFilter(urlPatterns = {"/order-status"})
-public class OrderStatusFilter implements Filter{
-    
+public class OrderStatusFilter implements Filter {
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
     }
@@ -58,14 +58,14 @@ public class OrderStatusFilter implements Filter{
         ProductService productService = ProductServiceSingleton.getInstance();
         UserService userService = UserServiceSingleton.getInstance();
         AddressService addressService = AddressServiceSingleton.getInstance();
-        
+
         try {
             List<Order> orders = orderService.getOrdersByCustomerId(userId);
             List<Order> processingOrder = new ArrayList<>();
             List<Order> deliveringOrder = new ArrayList<>();
             List<Order> deliveredOrder = new ArrayList<>();
-            if(orders.size() > 0){
-                for(Order order : orders){
+            if (orders.size() > 0) {
+                for (Order order : orders) {
                     // add more details to order
                     order.setSellerName(userService.getFullNameById(order.getSellerId()));
                     order.setSellerAddress(addressService.getAddressById(userService.getUserById(order.getSellerId()).getAddressId()).getAddress());
@@ -74,7 +74,7 @@ public class OrderStatusFilter implements Filter{
                     order.setProductName(product.getName());
                     order.setProductImage(product.getImage());
                     order.setPrice(product.getPrice());
-                    
+
                     // ordering order
                     if (order.getStatus() == 0) {
                         processingOrder.add(order);
@@ -87,15 +87,14 @@ public class OrderStatusFilter implements Filter{
                     }
                 }
             }
-            
+
             httpRequest.setAttribute("processingOrder", processingOrder);
             httpRequest.setAttribute("deliveringOrder", deliveringOrder);
             httpRequest.setAttribute("deliveredOrder", deliveredOrder);
             httpRequest.setAttribute("processingOrderSize", processingOrder.size());
             httpRequest.setAttribute("deliveringOrderSize", deliveringOrder.size());
             httpRequest.setAttribute("deliveredOrderSize", deliveredOrder.size());
-            
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(OrderStatusFilter.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -105,11 +104,9 @@ public class OrderStatusFilter implements Filter{
         userService.closeConnection();
         addressService.closeConnection();
         orderService.closeConnection();
-        
+
         chain.doFilter(request, response);
-        
-        
-        
+
     }
 
     @Override

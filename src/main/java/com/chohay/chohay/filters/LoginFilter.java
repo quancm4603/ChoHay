@@ -20,9 +20,9 @@ import javax.servlet.http.HttpSession;
  *
  * @author caomi
  */
-@WebFilter(urlPatterns = {"/dang-tin", "/create-product", "/create-order", "/order-status"})
-public class LoginFilter implements Filter{
-    
+@WebFilter(urlPatterns = {"/dang-tin", "/create-product", "/create-order", "/order-status", "/product-manager", "/delete-product"})
+public class LoginFilter implements Filter {
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
     }
@@ -36,10 +36,10 @@ public class LoginFilter implements Filter{
 
         if (session == null || session.getAttribute("user") == null) {
             httpResponse.sendRedirect("./login");
-        }else{
+        } else {
             chain.doFilter(request, response); // Continue the filter chain
         }
-        
+
     }
 
     @Override

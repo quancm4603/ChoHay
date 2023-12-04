@@ -39,7 +39,6 @@ public class SearchController extends HttpServlet {
         String keyword = request.getParameter("keyword");
         String category = request.getParameter("category");
         String pageStr = request.getParameter("page");
-
         int page = 1; // Trang mặc định là 1
         if (pageStr != null) {
             try {
@@ -50,17 +49,14 @@ public class SearchController extends HttpServlet {
                 // Ví dụ: response.sendRedirect("error.jsp");
             }
         }
-
         List<Product> products = null;
         // Lấy service
         ProductService productService = ProductServiceSingleton.getInstance();
         UserService userService = UserServiceSingleton.getInstance();
         AddressService addressService = AddressServiceSingleton.getInstance();
-
         try {
             // Tính toán chỉ số bắt đầu của sản phẩm trên trang
             int startIndex = (page - 1) * PRODUCTS_PER_PAGE;
-
             if (keyword != null && category != null) {
                 // Nếu cả keyword và category đều được cung cấp
                 products = productService.getProductsByKeywordAndCategoryWithPagination(keyword, category, startIndex, PRODUCTS_PER_PAGE);
@@ -72,20 +68,23 @@ public class SearchController extends HttpServlet {
                 products = productService.getProductsByCategoryWithPagination(category, startIndex, PRODUCTS_PER_PAGE);
             }
 
+            if (products.size() > 0) {
+                for (Product product : products) {
+                    product.setUsername(userService.getFullNameById(product.getUserId()));
+                    product.setAddress(addressService.getAddressById(product.getAddressId()).getAddress());
+                }
+            }
         } catch (SQLException ex) {
             Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         // Đóng kết nối
         productService.closeConnection();
         userService.closeConnection();
         addressService.closeConnection();
-
         // Cung cấp dữ liệu sản phẩm và thông tin phân trang cho request
         request.setAttribute("products", products);
         request.setAttribute("currentPage", page);
         request.setAttribute("productsPerPage", PRODUCTS_PER_PAGE);
-
         RequestDispatcher rd = request.getRequestDispatcher("/views/home/search.jsp");
         rd.forward(request, response);
     }
@@ -93,7 +92,5 @@ public class SearchController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
     }
-
 }
