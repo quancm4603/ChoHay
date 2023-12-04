@@ -142,10 +142,7 @@
                                     <p style="text-align: center;">2 đánh giá</p>
                                 </div>
                             </div>
-                            <div class="col" style="width: 50%;border-left-style: solid;border-left-color: var(--bs-body-bg);">
-                                <p style="font-size: 16px;text-align: center;font-weight: bold;">Phản hổi chat</p>
-                                <p style="text-align: center;margin-bottom: 0px;">70%</p>
-                            </div>
+                            
                         </div>
                         <div></div>
                     </div>
@@ -154,7 +151,6 @@
                         <button class="btn btn-primary" type="button" style="width: 100%;color: var(--bs-btn-active-color);background: #2e9f55;font-weight: bold;height: 70px;border-radius: 4px;">Mua ngay</button>
                         </a>
                         <button class="btn btn-primary" type="button" style="width: 100%;color: var(--bs-btn-active-color);background: #2e9f55;font-weight: bold;height: 70px;border-radius: 4px;margin: 10px 0;"><%=shop.getPhone()%></button>
-                        <button class="btn btn-primary" type="button" style="width: 100%;background: var(--bs-btn-disabled-color);color: var(--bs-btn-border-color);font-weight: bold;height: 70px;border: 2px solid var(--bs-success);font-size: 80%;border-radius: 4px;margin: 10px 0;">Chat với người bán</button>
                     </div>
                 </div>
                 <!--end shop details-->

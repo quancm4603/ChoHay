@@ -91,6 +91,10 @@ public class OrderStatusFilter implements Filter{
             httpRequest.setAttribute("processingOrder", processingOrder);
             httpRequest.setAttribute("deliveringOrder", deliveringOrder);
             httpRequest.setAttribute("deliveredOrder", deliveredOrder);
+            httpRequest.setAttribute("processingOrderSize", processingOrder.size());
+            httpRequest.setAttribute("deliveringOrderSize", deliveringOrder.size());
+            httpRequest.setAttribute("deliveredOrderSize", deliveredOrder.size());
+            
             
         } catch (SQLException ex) {
             Logger.getLogger(OrderStatusFilter.class.getName()).log(Level.SEVERE, null, ex);

@@ -28,9 +28,9 @@
         <%@include file="../../views/layout/header.jsp" %>
 
 
-        <div style="position: relative;margin: 0 auto;width: 936px;">
-            <div style="position: relative;margin: 0 auto;width: 936px;background: var(--bs-body-bg);">
-                <div style="width: 936px;height: auto;">
+        <div style="position: relative;margin: 0 auto;width: 100%;">
+            <div style="position: relative;margin: 0 auto;width: 100%;background: var(--bs-body-bg);">
+                <div style="width: 100%;height: auto;">
                     <div style="background-color: #fff;">
                         <div style="margin-top: 12px;padding: 16px;display: flex;"><span style="font-weight: bold;color: #22a10d;"><%=request.getAttribute("status")%></span></div>
                     </div>
@@ -39,8 +39,8 @@
                     </div>
                 </div>
             </div>
-            <div style="position: relative;margin: 0 auto;width: 936px;background: var(--bs-body-bg);margin-top: 10px;">
-                <div style="width: 936px;height: auto;">
+            <div style="position: relative;margin: 0 auto;width: 100%;background: var(--bs-body-bg);margin-top: 10px;">
+                <div style="width: 100%;height: auto;">
                     <div style="background: #fff;border-bottom: 1px solid #f4f4f4;">
                         <div>
                             <div style="display: flex;padding: 0 0 12px;padding-top: 12px;padding-left: 20px;font-size: 18px;border-radius: 1px;border-top: 1px solid var(--bs-secondary-color) ;border-right: 1px solid var(--bs-secondary-color) ;border-bottom: 1px solid var(--bs-secondary-color) ;border-left: 1px solid var(--bs-secondary-color) ;"><span style="font-weight: bold;font-size: 17px;">Mã đơn hàng: <%=order.getId()%></span></div>
@@ -69,8 +69,8 @@
                     </div>
                 </div>
             </div>
-            <div style="position: relative;margin: 0 auto;width: 936px;background: var(--bs-body-bg);margin-top: 10px;">
-                <div style="width: 936px;height: auto;">
+            <div style="position: relative;margin: 0 auto;width: 100%;background: var(--bs-body-bg);margin-top: 10px;">
+                <div style="width: 100%;height: auto;">
                     <div style="background: #fff;border-bottom: 1px solid #f4f4f4;">
                         <div>
                             <div style="display: flex;padding: 0 0 12px;padding-top: 12px;padding-left: 20px;font-size: 18px;border-radius: 1px;border-top: 1px solid var(--bs-secondary-color) ;border-right: 1px solid var(--bs-secondary-color) ;border-bottom: 1px solid var(--bs-secondary-color) ;border-left: 1px solid var(--bs-secondary-color) ;"><span style="font-weight: bold;font-size: 17px;">Địa chỉ nhận hàng</span></div>
@@ -85,8 +85,8 @@
                     </div>
                 </div>
             </div>
-            <div style="position: relative;margin: 0 auto;width: 936px;background: var(--bs-body-bg);margin-top: 10px;">
-                <div style="width: 936px;height: auto;">
+            <div style="position: relative;margin: 0 auto;width: 100%;background: var(--bs-body-bg);margin-top: 10px;">
+                <div style="width: 100%;height: auto;">
                     <div style="background: #fff;border-bottom: 1px solid #f4f4f4;">
                         <div>
                             <div style="display: flex;padding: 0 0 12px;padding-top: 12px;padding-left: 20px;font-size: 18px;border-radius: 1px;border-top: 1px solid var(--bs-secondary-color) ;border-right: 1px solid var(--bs-secondary-color) ;border-bottom: 1px solid var(--bs-secondary-color) ;border-left: 1px solid var(--bs-secondary-color) ;"><span style="font-weight: bold;font-size: 17px;">Phương thức giao hàng</span></div>
@@ -95,8 +95,8 @@
                     </div>
                 </div>
             </div>
-            <div style="position: relative;margin: 0 auto;width: 936px;background: var(--bs-body-bg);margin-top: 10px;">
-                <div style="width: 936px;height: auto;">
+            <div style="position: relative;margin: 0 auto;width: 100%;background: var(--bs-body-bg);margin-top: 10px;">
+                <div style="width: 100%;height: auto;">
                     <div style="background: #fff;border-bottom: 1px solid #f4f4f4;">
                         <div>
                             <div style="display: flex;padding: 0 0 12px;padding-top: 12px;padding-left: 20px;font-size: 18px;border-radius: 1px;border-top: 1px solid var(--bs-secondary-color) ;border-right: 1px solid var(--bs-secondary-color) ;border-bottom: 1px solid var(--bs-secondary-color) ;border-left: 1px solid var(--bs-secondary-color) ;"><span style="font-weight: bold;font-size: 17px;">Phương thức thanh toán</span></div>
@@ -104,7 +104,7 @@
                         <div class="text-start" style="margin-bottom:16px;"><label class="form-label form-label form-label form-label" style="color: #55595c;font-weight: bold;margin-top: 0px;margin-left: 10px;">Thanh toán tiền mặt</label></div>
                     </div>
                 </div>
-                <div style="width: 936px;height: auto;">
+                <div style="width: 100%;height: auto;">
                     <div style="background: #fff;border-bottom: 1px solid #f4f4f4;">
                         <div>
                             <div style="display: flex;padding: 0 0 12px;padding-top: 12px;padding-left: 20px;font-size: 18px;border-radius: 1px;border-top: 1px solid var(--bs-secondary-color) ;border-right: 1px solid var(--bs-secondary-color) ;border-bottom: 1px solid var(--bs-secondary-color) ;border-left: 1px solid var(--bs-secondary-color) ;"><span style="font-weight: bold;font-size: 17px;">Thông tin thanh toán</span></div>
