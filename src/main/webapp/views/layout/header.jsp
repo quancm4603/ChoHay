@@ -23,13 +23,6 @@
                             <a class="dropdown-item" href="./search?category=Dog">Chó</a>
                         </div>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#" style="width: auto;">Đơn hàng</a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="./order-status">Đơn mua</a>
-                            <a class="dropdown-item" href="./sell-status">Đơn bán</a>
-                        </div>
-                    </li>
                 </ul>
                 <ul class="navbar-nav" style="width: 50%;">
                     <li class="nav-item" style="width: 100%;">
@@ -39,17 +32,7 @@
                         </form>
                     </li>
                 </ul>
-
                 <ul class="navbar-nav ms-auto" style="width: 30%;margin-left: -7.4219px;height: 100%;">
-                    <ul class="navbar-nav me-auto" style="padding-right: 0px;margin-right: 0px;width: 20%;min-width: 100px;">
-                        <li class="nav-item dropdown">
-                            <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#" style="width: auto;">Sản phẩm</a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="./product-manager">Quản lí tin đăng</a>
-                                <a class="dropdown-item" href="./product-fav">Sản phẩm yêu thích</a>
-                            </div>
-                        </li>
-                    </ul>
                     <%
                         if (session != null && session.getAttribute("user") != null) {
                     %>

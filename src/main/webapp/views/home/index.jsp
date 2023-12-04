@@ -49,7 +49,7 @@
                                 <!-- Đặt chiều rộng cố định là 100% của container -->
                             </div>
                             <div>
-                                <a class="texthome" href="./product?id=<%=product.getId()%>" style="display: block; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; max-width: 100%;"><%=product.getName()%></a>
+                                <a class="texthome" href="./product?id=<%=product.getId()%>"><%=product.getName()%></a>
                                 <div><span class="pricehome"><%=product.getPriceToString()%> đ</span></div>
                             </div>
                             <div class="AdBody_footer__78mtV">
