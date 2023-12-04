@@ -71,13 +71,6 @@ public class SearchController extends HttpServlet {
                 // Nếu chỉ có category được cung cấp
                 products = productService.getProductsByCategoryWithPagination(category, startIndex, PRODUCTS_PER_PAGE);
             }
-            
-            if (products.size() > 0) {
-                for (Product product : products) {
-                    product.setUsername(userService.getFullNameById(product.getUserId()));
-                    product.setAddress(addressService.getAddressById(product.getAddressId()).getAddress());
-                }
-            }
 
         } catch (SQLException ex) {
             Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);

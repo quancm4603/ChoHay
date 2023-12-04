@@ -34,8 +34,7 @@ CREATE TABLE `Products`(
                            `phone` CHAR(10) NOT NULL,
                            `address_id` BIGINT UNSIGNED NOT NULL,
                            `category` VARCHAR(32) NOT NULL,
-                           `details` JSON NOT NULL,
-                           `status` INT DEFAULT '0'
+                           `details` JSON NOT NULL
 );
 CREATE TABLE `Orders`(
                          `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
