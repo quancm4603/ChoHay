@@ -11,9 +11,9 @@
 
 <%
     List<Order> deliveredOrder = (List<Order>) request.getAttribute("deliveredOrder");
-    int processingOrderSize = (int)request.getAttribute("processingOrderSize");
-    int deliveringOrderSize = (int)request.getAttribute("deliveringOrderSize");
-    int deliveredOrderSize = (int)request.getAttribute("deliveredOrderSize");
+    int processingOrderSize = (int) request.getAttribute("processingOrderSize");
+    int deliveringOrderSize = (int) request.getAttribute("deliveringOrderSize");
+    int deliveredOrderSize = (int) request.getAttribute("deliveredOrderSize");
 %>
 
 <!DOCTYPE html>

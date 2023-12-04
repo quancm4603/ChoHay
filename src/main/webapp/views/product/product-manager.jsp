@@ -10,7 +10,7 @@
          pageEncoding="UTF-8"%>
 
 <%
-    List<Product> products = (List<Product>) request.getAttribute("products");
+    List<Product> products = (List<Product>)request.getAttribute("products");
 %>
 
 <!DOCTYPE html>

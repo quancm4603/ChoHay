@@ -51,7 +51,7 @@
                                         <span style="font-weight: 700; font-size: 1em; color: var(--to6lhll-2);">đang GIAO ( <%=deliveringOrderSize%> )</span>
                                     </button>
                                 </form>
-                                <form action="./order-status" method="post" style="flex: 1; width: auto; text-align: end;">
+                                 <form action="./order-status" method="post" style="flex: 1; width: auto; text-align: end;">
                                     <input name="status" type="hidden" value="delivered">
                                     <button class="btn btn-primary" type="submit" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; padding: 1em; justify-content: center; background-color: transparent; color: var(--bs-btn-hover-bg);">
                                         <span style="font-weight: 700; font-size: 1em; color: var(--to6lhll-2);">ĐÃ giao ( <%=deliveredOrderSize%> )</span>
@@ -59,7 +59,6 @@
                                 </form>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>

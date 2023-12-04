@@ -44,6 +44,8 @@ public class HomeController extends HttpServlet {
         try {
             products = productService.getNumberOfProducts(8);
 //                products = productService.getLatestProductsStartingFromN(0, 2);
+//            products = productService.getNumberOfProducts(8);
+            products = productService.getLatestProductsStartingFromN(0, 16);
 //            products = productService.getCheapestProductsStartingFromN(0, 2);
             if (products.size() > 0) {
                 for (Product product : products) {

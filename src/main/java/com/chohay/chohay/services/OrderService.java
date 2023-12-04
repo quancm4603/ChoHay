@@ -8,7 +8,6 @@ package com.chohay.chohay.services;
  *
  * @author caomi
  */
-package com.chohay.chohay.services;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

@@ -2,6 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
+
 package com.chohay.chohay.controllers.authen;
 
 import com.chohay.chohay.models.User;
@@ -25,66 +26,58 @@ import javax.servlet.http.HttpSession;
  *
  * @author caomi
  */
-@WebServlet(name = "LoginController", urlPatterns = {"/login", "/dang-nhap"})
+@WebServlet(name="LoginController", urlPatterns={"/login", "/dang-nhap"})
 public class LoginController extends HttpServlet {
-
+ 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    throws ServletException, IOException {
         HttpSession session = request.getSession(false);
         if (session != null && session.getAttribute("user") != null) {
             response.sendRedirect("./");
-        } else {
+        }else{
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/authen/login.jsp");
             requestDispatcher.forward(request, response);
         }
-
-    }
+        
+    } 
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    throws ServletException, IOException {
         try {
             //Get login params
             String username = request.getParameter("username");
             String password = request.getParameter("password");
-            // Đọc URL trang trước đó từ session
-            HttpSession session1 = request.getSession(false);
-            String previousPage = (String) session1.getAttribute("previousPage");
-
+            
             //Valitade
             UserService userService = UserServiceSingleton.getInstance();
             if (userService.validateUser(username, password)) {
                 HttpSession session = request.getSession();
                 User user = userService.getUserByUserNameOrEmail(username);
                 session.setAttribute("user", user);
-
+                
                 String remember = request.getParameter("remember");
                 if (remember != null) {
                     Cookie usernameCookie = new Cookie("username", username);
-                    usernameCookie.setMaxAge(60 * 24 * 3);
+                    usernameCookie.setMaxAge(60*24*3);
                     Cookie passwordCookie = new Cookie("password", password);
-                    passwordCookie.setMaxAge(60 * 24 * 3);
+                    passwordCookie.setMaxAge(60*24*3);
                     response.addCookie(usernameCookie);
                     response.addCookie(passwordCookie);
-
+                    
                 }
                 userService.closeConnection();
-
-                if (previousPage != null && !previousPage.contains("/login")) {
-                    // Nếu có thông tin trang trước đó và không phải trang đăng nhập, chuyển hướng người dùng về trang trước đó sau khi đăng nhập thành công
-                    response.sendRedirect(previousPage);
-                } else {
-                    // Nếu không có thông tin trang trước đó hoặc nó là trang đăng nhập, chuyển hướng về trang mặc định
-                    response.sendRedirect("./");
-                }
-            } else {
+                
+                response.sendRedirect("./");
+            }else{
                 response.sendRedirect("./login");
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-
+        
     }
+
 
 }
