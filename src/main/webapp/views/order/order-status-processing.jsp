@@ -11,6 +11,9 @@
 
 <%
     List<Order> processingOrder = (List<Order>) request.getAttribute("processingOrder");
+    int processingOrderSize = (int) request.getAttribute("processingOrderSize");
+    int deliveringOrderSize = (int) request.getAttribute("deliveringOrderSize");
+    int deliveredOrderSize = (int) request.getAttribute("deliveredOrderSize");
 %>
 
 <!DOCTYPE html>
@@ -32,30 +35,31 @@
                     <div style="background-color: #fff;">
                         <div style="margin-top: 12px;padding: 16px;display: flex;"><a href="#"><span style="font-weight: bold;">Cho hay</span></a><span style="margin-left: 5px;">&gt;</span><span style="margin-left: 5px;">Đơn mua</span></div>
                     </div>
-                    <div style="background: #fff;border-bottom: 1px solid #f4f4f4;">
-                        <div style="display: flex;overflow: hidden;">
-                            <div style="--t1fgqb9w-0: auto;overflow-x: var(--t1fgqb9w-0);flex: 1 1 auto;display: flex;position: relative;white-space: nowrap;/*--t1fgqb9w-0: auto;*/">
-                                <form action="./order-status" method="post">
+                    <div style="background: #fff;border-bottom: 1px solid #f4f4f4; width: 100%">
+                        <div style="background: #fff; border-bottom: 1px solid #f4f4f4; width: 100%; overflow: hidden;">
+                            <div style="display: flex; overflow-x: auto; justify-content: space-between;">
+                                <form action="./order-status" method="post" style="flex: 1; width: auto; text-align: start;">
                                     <input name="status" type="hidden" value="processing">
-                                    <button class="btn btn-primary" type="submit" style="--display: inline-flex;line-height: 1;flex-direction: row-reverse;padding: 14px;display: var(--display);justify-content: center;background-color: transparent;position: relative;line-height: 1;flex-direction: row-reverse;padding: 14px;color: var(--bs-btn-hover-bg);">
-                                        <span style="min-height: unset;min-width: unset;margin-left: 4px;display: inline-flex;align-items: center;flex-direction: column;justify-content: center;height: 100%;font-weight: 700;font-size: .95rem;color: var(--to6lhll-2);">đang xử lý ( <%=processingOrder.size()%> )</span>
-                                        <span style="min-height: unset;min-width: unset;margin-left: 4px;--twdt1ol-0: #FF8800;background-color: var(--twdt1ol-0);bottom: 0;height: 4px;position: absolute;width: 100%;"></span>
+                                    <button class="btn btn-primary" type="submit" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; padding: 1em; justify-content: center; background-color: transparent; color: var(--bs-btn-hover-bg);">
+                                        <span style="font-weight: 700; font-size: 1em; color: var(--to6lhll-2);">đang xử lý ( <%=processingOrderSize%> )</span>
+                                        <span style="background-color: #FF8800; height: 0.25em; width: 100%;"></span>
                                     </button>
                                 </form>
-                                <form action="./order-status" method="post">
+                                <form action="./order-status" method="post" style="flex: 1; width: auto; text-align: center;">
                                     <input name="status" type="hidden" value="delivering">
-                                    <button class="btn btn-primary" type="submit" style="--display: inline-flex;line-height: 1;flex-direction: row-reverse;padding: 14px;display: var(--display);justify-content: center;background-color: transparent;position: relative;line-height: 1;flex-direction: row-reverse;padding: 14px;color: var(--bs-btn-hover-bg);margin-left: 280px;margin-right: 260px;">
-                                        <span style="min-height: unset;min-width: unset;margin-left: 4px;display: inline-flex;align-items: center;flex-direction: column;justify-content: center;height: 100%;font-weight: 700;font-size: .95rem;color: var(--to6lhll-2);">đang GIAO</span>
+                                    <button class="btn btn-primary" type="submit" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; padding: 1em; justify-content: center; background-color: transparent; color: var(--bs-btn-hover-bg);">
+                                        <span style="font-weight: 700; font-size: 1em; color: var(--to6lhll-2);">đang GIAO ( <%=deliveringOrderSize%> )</span>
                                     </button>
                                 </form>
-                                <form action="./order-status" method="post">
+                                <form action="./order-status" method="post" style="flex: 1; width: auto; text-align: end;">
                                     <input name="status" type="hidden" value="delivered">
-                                    <button class="btn btn-primary" type="submit" style="--display: inline-flex;line-height: 1;flex-direction: row-reverse;padding: 14px;display: var(--display);justify-content: center;background-color: transparent;position: relative;line-height: 1;flex-direction: row-reverse;padding: 14px;color: var(--bs-btn-hover-bg);">
-                                        <span style="min-height: unset;min-width: unset;margin-left: 4px;display: inline-flex;align-items: center;flex-direction: column;justify-content: center;height: 100%;font-weight: 700;font-size: .95rem;color: var(--to6lhll-2);">ĐÃ giao</span>
+                                    <button class="btn btn-primary" type="submit" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; padding: 1em; justify-content: center; background-color: transparent; color: var(--bs-btn-hover-bg);">
+                                        <span style="font-weight: 700; font-size: 1em; color: var(--to6lhll-2);">ĐÃ giao ( <%=deliveredOrderSize%> )</span>
                                     </button>
                                 </form>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>

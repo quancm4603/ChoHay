@@ -11,6 +11,9 @@
 
 <%
     List<Order> deliveringOrder = (List<Order>) request.getAttribute("deliveringOrder");
+    int processingOrderSize = (int)request.getAttribute("processingOrderSize");
+    int deliveringOrderSize = (int)request.getAttribute("deliveringOrderSize");
+    int deliveredOrderSize = (int)request.getAttribute("deliveredOrderSize");
 %>
 
 <!DOCTYPE html>
@@ -38,20 +41,20 @@
                                 <form action="./order-status" method="post">
                                     <input name="status" type="hidden" value="processing">
                                     <button class="btn btn-primary" type="submit" style="--display: inline-flex;line-height: 1;flex-direction: row-reverse;padding: 14px;display: var(--display);justify-content: center;background-color: transparent;position: relative;line-height: 1;flex-direction: row-reverse;padding: 14px;color: var(--bs-btn-hover-bg);">
-                                        <span style="min-height: unset;min-width: unset;margin-left: 4px;display: inline-flex;align-items: center;flex-direction: column;justify-content: center;height: 100%;font-weight: 700;font-size: .95rem;color: var(--to6lhll-2);">đang xử lý </span>
+                                        <span style="min-height: unset;min-width: unset;margin-left: 4px;display: inline-flex;align-items: center;flex-direction: column;justify-content: center;height: 100%;font-weight: 700;font-size: .95rem;color: var(--to6lhll-2);">đang xử lý ( <%=processingOrderSize%> )</span>
                                     </button>
                                 </form>
                                 <form action="./order-status" method="post">
                                     <input name="status" type="hidden" value="delivering">
                                     <button class="btn btn-primary" type="submit" style="--display: inline-flex;line-height: 1;flex-direction: row-reverse;padding: 14px;display: var(--display);justify-content: center;background-color: transparent;position: relative;line-height: 1;flex-direction: row-reverse;padding: 14px;color: var(--bs-btn-hover-bg);margin-left: 280px;margin-right: 260px;">
-                                        <span style="min-height: unset;min-width: unset;margin-left: 4px;display: inline-flex;align-items: center;flex-direction: column;justify-content: center;height: 100%;font-weight: 700;font-size: .95rem;color: var(--to6lhll-2);">đang GIAO ( <%=deliveringOrder.size()%> )</span>
+                                        <span style="min-height: unset;min-width: unset;margin-left: 4px;display: inline-flex;align-items: center;flex-direction: column;justify-content: center;height: 100%;font-weight: 700;font-size: .95rem;color: var(--to6lhll-2);">đang GIAO ( <%=deliveringOrderSize%> )</span>
                                         <span style="min-height: unset;min-width: unset;margin-left: 4px;--twdt1ol-0: #FF8800;background-color: var(--twdt1ol-0);bottom: 0;height: 4px;position: absolute;width: 100%;"></span>
                                     </button>
                                 </form>
                                 <form action="./order-status" method="post">
                                     <input name="status" type="hidden" value="delivered">
                                     <button class="btn btn-primary" type="submit" style="--display: inline-flex;line-height: 1;flex-direction: row-reverse;padding: 14px;display: var(--display);justify-content: center;background-color: transparent;position: relative;line-height: 1;flex-direction: row-reverse;padding: 14px;color: var(--bs-btn-hover-bg);">
-                                        <span style="min-height: unset;min-width: unset;margin-left: 4px;display: inline-flex;align-items: center;flex-direction: column;justify-content: center;height: 100%;font-weight: 700;font-size: .95rem;color: var(--to6lhll-2);">ĐÃ giao</span>
+                                        <span style="min-height: unset;min-width: unset;margin-left: 4px;display: inline-flex;align-items: center;flex-direction: column;justify-content: center;height: 100%;font-weight: 700;font-size: .95rem;color: var(--to6lhll-2);">ĐÃ giao ( <%=deliveredOrderSize%> )</span>
                                     </button>
                                 </form>
                             </div>

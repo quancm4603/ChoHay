@@ -8,7 +8,7 @@
          pageEncoding="UTF-8"%>
 
 
-<header style="width: 100vw;">
+<header style="width: 100%;">
     <nav class="navbar navbar-expand-md bg-body">
         <div class="container-fluid">
             <a class="navbar-brand" href="./" style="width: 10%;font-weight: bold;font-size: 23px;text-align: center;">cho hay</a>

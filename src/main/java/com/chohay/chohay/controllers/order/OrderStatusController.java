@@ -4,27 +4,13 @@
  */
 package com.chohay.chohay.controllers.order;
 
-import com.chohay.chohay.models.Order;
-import com.chohay.chohay.models.Product;
-import com.chohay.chohay.models.User;
-import com.chohay.chohay.services.AddressService;
-import com.chohay.chohay.services.AddressServiceSingleton;
-import com.chohay.chohay.services.OrderService;
-import com.chohay.chohay.services.OrderServiceSingleton;
-import com.chohay.chohay.services.ProductService;
-import com.chohay.chohay.services.ProductServiceSingleton;
-import com.chohay.chohay.services.UserService;
-import com.chohay.chohay.services.UserServiceSingleton;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *

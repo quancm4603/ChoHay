@@ -37,7 +37,6 @@
                                 </div>
                                 <input name="remember" id="remember" type="checkbox" style="margin-top: 5px;"/>
                                 <label class="form-label form-label" for="remember" style="margin-top:5px;margin-left:3px;">Ghi nhớ đăng nhập</label>
-                                <p class="text-muted" style="text-align: left;width: 100%;"><a style="color: rgba(26,26,26,0.58);" href="./register">Quên mật khẩu?</a></p>
                                 <div class="mb-3" style="width: 100%;"><button class="btn btn-primary d-block w-100" type="submit">đăng nhập</button></div>
                                 <p class="text-muted ctk-login" style="text-align: left;color: #55595c;width: 100%;">Chưa có tài khoản?&nbsp;<a style="color: rgba(26,26,26,0.58);font-weight: bold;" href="./register">Đăng ký tài khoản mới</a></p>
                             </form>

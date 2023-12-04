@@ -84,7 +84,7 @@
                                         <label class="form-label form-label form-label form-label" style="color:#55595c;font-weight:bold;margin-top:10px;">Địa chỉ cụ thể *</label>
                                         <input name="street" required="" class="form-control form-control form-control form-control" type="text" id="street" name="street" placeholder="Địa chỉ cụ thể" style="color:rgb(0,0,0);width:100%;"></div>
                                     <div class="mb-3" style="width:100%;"><button class="btn btn-primary d-block w-100" type="submit">đăng ký</button></div>
-                                    <p class="text-center text-muted" style="text-align: left;color: #55595c;width: 100%;">Đã có tài khoản?&nbsp;<a href="login.html" style="color: #1a1a1a94;font-weight: bold;">Đăng nhập ngay</a></p>
+                                    <p class="text-center text-muted" style="text-align: left;color: #55595c;width: 100%;">Đã có tài khoản?&nbsp;<a href="./login" style="color: #1a1a1a94;font-weight: bold;">Đăng nhập ngay</a></p>
                                 </form>
                             </div>
                         </div>
