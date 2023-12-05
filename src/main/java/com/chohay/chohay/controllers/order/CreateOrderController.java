@@ -31,10 +31,15 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(name = "CreateOrderController", urlPatterns = {"/create-order"})
 public class CreateOrderController extends HttpServlet {
-
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        HttpSession session = request.getSession(false);
+        User user = (User) session.getAttribute("user");
+        int userId = user.getId();
+        Product product = null;
 
         // Lấy id từ request parameter
         String productIdParam = request.getParameter("id");
@@ -48,8 +53,8 @@ public class CreateOrderController extends HttpServlet {
                 ProductService productService = ProductServiceSingleton.getInstance();
                 UserService userService = UserServiceSingleton.getInstance();
                 AddressService addressService = AddressServiceSingleton.getInstance();
-
-                Product product = productService.getProductById(productId);
+                
+                product = productService.getProductById(productId);
 
                 // Nếu product tồn tại, đặt nó vào attribute và chuyển tiếp cho trang JSP
                 if (product != null) {
@@ -66,7 +71,7 @@ public class CreateOrderController extends HttpServlet {
                 productService.closeConnection();
                 userService.closeConnection();
                 addressService.closeConnection();
-
+                
             } catch (NumberFormatException | SQLException ex) {
                 ex.printStackTrace();
                 // Xử lý khi có lỗi xảy ra trong quá trình xử lý id
@@ -78,10 +83,14 @@ public class CreateOrderController extends HttpServlet {
             // Ví dụ: Hiển thị thông báo lỗi
             request.setAttribute("errorMessage", "Không có ID sản phẩm được cung cấp.");
         }
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/order/create-order.jsp");
-        requestDispatcher.forward(request, response);
+        if (product != null && product.getUserId() != userId) {
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/order/create-order.jsp");
+            requestDispatcher.forward(request, response);
+        } else {
+            response.sendRedirect("./");
+        }
     }
-
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -127,7 +136,7 @@ public class CreateOrderController extends HttpServlet {
             ProductService productService = ProductServiceSingleton.getInstance();
             UserService userService = UserServiceSingleton.getInstance();
             AddressService addressService = AddressServiceSingleton.getInstance();
-
+            
             Product product = productService.getProductById(productId);
 
             // Nếu product tồn tại, đặt nó vào attribute và chuyển tiếp cho trang JSP
@@ -140,19 +149,14 @@ public class CreateOrderController extends HttpServlet {
                 // Ví dụ: Hiển thị thông báo lỗi
                 request.setAttribute("errorMessage", "Không tìm thấy sản phẩm với ID: " + productId);
             }
-
-            int generatedOrderId = orderService.addOrder(order);
             
+            int generatedOrderId = orderService.addOrder(order);
+
             //close connection
             productService.closeConnection();
             userService.closeConnection();
             addressService.closeConnection();
             orderService.closeConnection();
-            
-            
-            
-
-            
 
             // Kiểm tra xem đơn hàng đã được tạo thành công hay không
             if (generatedOrderId != -1) {
@@ -177,7 +181,7 @@ public class CreateOrderController extends HttpServlet {
             // Ví dụ: Hiển thị thông báo lỗi
             request.setAttribute("errorMessage", "Có lỗi xảy ra khi xử lý dữ liệu. Vui lòng thử lại sau.");
         }
-
+        
     }
-
+    
 }
