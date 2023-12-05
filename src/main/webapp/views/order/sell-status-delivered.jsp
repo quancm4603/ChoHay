@@ -10,7 +10,7 @@
          pageEncoding="UTF-8"%>
 
 <%
-    List<Order> processingOrder = (List<Order>) request.getAttribute("processingOrder");
+    List<Order> deliveredOrder = (List<Order>) request.getAttribute("deliveredOrder");
     int processingOrderSize = (int) request.getAttribute("processingOrderSize");
     int deliveringOrderSize = (int) request.getAttribute("deliveringOrderSize");
     int deliveredOrderSize = (int) request.getAttribute("deliveredOrderSize");
@@ -22,17 +22,13 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-        <title>Đơn hàng đang xử lí</title>
+        <title>Đơn hàng đã giao</title>
         <%@include file="../../views/resources/style.jsp" %>
     </head>
 
     <body style="color: var(--bs-primary-text-emphasis);background: var(--bs-gray-300);">
         <%@include file="../../views/layout/header.jsp" %>
 
-        <h1>${cancelStatus}</h1>
-        <%
-            session.setAttribute("cancelStatus", "");
-        %>
         <div style="position: relative;margin: 10px auto;width: 70%;">
             <div style="position: relative;margin: 0 auto;width: 936px;background: var(--bs-body-bg);">
                 <div style="width: 100%;height: auto;">
@@ -42,20 +38,20 @@
                     <div style="background: #fff;border-bottom: 1px solid #f4f4f4; width: 100%">
                         <div style="background: #fff; border-bottom: 1px solid #f4f4f4; width: 100%; overflow: hidden;">
                             <div style="display: flex; overflow-x: auto; justify-content: space-between;">
-                                <form action="./order-status" method="post" style="flex: 1; width: auto; text-align: start;">
+                                <form action="./sell-status" method="post" style="flex: 1; width: auto; text-align: start;">
                                     <input name="status" type="hidden" value="processing">
                                     <button class="btn btn-primary" type="submit" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; padding: 1em; justify-content: center; background-color: transparent; color: var(--bs-btn-hover-bg);">
                                         <span style="font-weight: 700; font-size: 1em; color: var(--to6lhll-2);">đang xử lý ( <%=processingOrderSize%> )</span>
                                         <span style="background-color: #FF8800; height: 0.25em; width: 100%;"></span>
                                     </button>
                                 </form>
-                                <form action="./order-status" method="post" style="flex: 1; width: auto; text-align: center;">
+                                <form action="./sell-status" method="post" style="flex: 1; width: auto; text-align: center;">
                                     <input name="status" type="hidden" value="delivering">
                                     <button class="btn btn-primary" type="submit" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; padding: 1em; justify-content: center; background-color: transparent; color: var(--bs-btn-hover-bg);">
                                         <span style="font-weight: 700; font-size: 1em; color: var(--to6lhll-2);">đang GIAO ( <%=deliveringOrderSize%> )</span>
                                     </button>
                                 </form>
-                                 <form action="./order-status" method="post" style="flex: 1; width: auto; text-align: end;">
+                                 <form action="./sell-status" method="post" style="flex: 1; width: auto; text-align: end;">
                                     <input name="status" type="hidden" value="delivered">
                                     <button class="btn btn-primary" type="submit" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; padding: 1em; justify-content: center; background-color: transparent; color: var(--bs-btn-hover-bg);">
                                         <span style="font-weight: 700; font-size: 1em; color: var(--to6lhll-2);">ĐÃ giao ( <%=deliveredOrderSize%> )</span>
@@ -70,7 +66,7 @@
                 <div style="width: 936px;height: auto;">
 
                     <%
-                        for (Order order : processingOrder) {
+                        for (Order order : deliveredOrder) {
                     %>
 
                     <!--order here-->
@@ -109,16 +105,6 @@
                             <div style="width: 25%;text-align: right;/*text-align: center;*/">
                                 <div style="height: 30%;"></div><span style="font-weight: bold;padding-top: 10px;margin-top: 0;"><%=order.getPriceToString()%></span>
                             </div>
-                        </div>
-                    </div>
-
-
-                    <div style="padding-top: 5px;">
-                        <div style="text-align: end;">
-                            <form action="./cancel-order" method="post">
-                                <input name="orderId" type="hidden" value="<%=order.getId()%>">
-                                <button class="btn btn-primary" type="submit">HỦY ĐƠN</button>
-                            </form>
                         </div>
                     </div>
                     <%
