@@ -8,7 +8,6 @@ package com.chohay.chohay.services;
  *
  * @author caomi
  */
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -116,6 +115,21 @@ public class OrderService {
         return orders;
     }
 
+    public List<Order> getOrdersBySellerId(int sellerId) throws SQLException {
+        List<Order> orders = new ArrayList<>();
+        String query = "SELECT * FROM Orders WHERE seller_id=?";
+        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, sellerId);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    Order order = extractOrderFromResultSet(resultSet);
+                    orders.add(order);
+                }
+            }
+        }
+        return orders;
+    }
+
     // Hàm trợ giúp để tạo đối tượng Order từ ResultSet
     private Order extractOrderFromResultSet(ResultSet resultSet) throws SQLException {
         Order order = new Order();
@@ -133,6 +147,19 @@ public class OrderService {
         order.setStatus(resultSet.getInt("status"));
         order.setCustomerComment(resultSet.getString("customer_comment"));
         return order;
+    }
+
+    public void setOrderStatus(int orderId, int newStatus) throws SQLException {
+        String query = "UPDATE Orders SET status = ? WHERE id = ?";
+        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, newStatus);
+            preparedStatement.setInt(2, orderId);
+
+            int affectedRows = preparedStatement.executeUpdate();
+            if (affectedRows == 0) {
+                throw new SQLException("Cập nhật trạng thái đơn hàng không thành công, không có đơn hàng nào được cập nhật.");
+            }
+        }
     }
 
     // Các phương thức xử lý đơn hàng khác (sửa, xóa, lấy thông tin đơn hàng, ...)
