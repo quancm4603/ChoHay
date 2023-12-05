@@ -14,6 +14,7 @@
     int processingOrderSize = (int) request.getAttribute("processingOrderSize");
     int deliveringOrderSize = (int) request.getAttribute("deliveringOrderSize");
     int deliveredOrderSize = (int) request.getAttribute("deliveredOrderSize");
+    int cancelOrderSize = (int) request.getAttribute("cancelOrderSize");
 %>
 
 <!DOCTYPE html>
@@ -33,7 +34,14 @@
             <div style="position: relative;margin: 0 auto;width: 936px;background: var(--bs-body-bg);">
                 <div style="width: 100%;height: auto;">
                     <div style="background-color: #fff;">
-                        <div style="margin-top: 12px;padding: 16px;display: flex;"><a href="#"><span style="font-weight: bold;">Cho hay</span></a><span style="margin-left: 5px;">&gt;</span><span style="margin-left: 5px;">Đơn mua</span></div>
+                        <div style="margin-top: 12px;padding: 16px;display: flex;">
+                            <a href="./">
+                                <span style="font-weight: bold;">Cho hay</span>
+                            </a>
+                            <a href="./order-status">
+                                <span style="margin-left: 5px;">&gt;</span><span style="margin-left: 5px;">Đơn mua</span>
+                            </a>
+                        </div>
                     </div>
                     <div style="background: #fff;border-bottom: 1px solid #f4f4f4; width: 100%">
                         <div style="background: #fff; border-bottom: 1px solid #f4f4f4; width: 100%; overflow: hidden;">
@@ -47,14 +55,20 @@
                                 </form>
                                 <form action="./order-status" method="post" style="flex: 1; width: auto; text-align: center;">
                                     <input name="status" type="hidden" value="delivering">
-                                    <button class="btn btn-primary" type="submit" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; padding: 1em; justify-content: center; background-color: transparent; color: var(--bs-btn-hover-bg);">
+                                    <button class="btn btn-primary" type="submit">
                                         <span style="font-weight: 700; font-size: 1em; color: var(--to6lhll-2);">đang GIAO ( <%=deliveringOrderSize%> )</span>
                                     </button>
                                 </form>
-                                 <form action="./order-status" method="post" style="flex: 1; width: auto; text-align: end;">
+                                <form action="./order-status" method="post" style="flex: 1; width: auto; text-align: center;">
                                     <input name="status" type="hidden" value="delivered">
                                     <button class="btn btn-primary" type="submit" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; padding: 1em; justify-content: center; background-color: transparent; color: var(--bs-btn-hover-bg);">
                                         <span style="font-weight: 700; font-size: 1em; color: var(--to6lhll-2);">ĐÃ giao ( <%=deliveredOrderSize%> )</span>
+                                    </button>
+                                </form>
+                                <form action="./order-status" method="post" style="flex: 1; width: auto; text-align: end;">
+                                    <input name="status" type="hidden" value="cancel">
+                                    <button class="btn btn-primary" type="submit" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; padding: 1em; justify-content: center; background-color: transparent; color: var(--bs-btn-hover-bg);">
+                                        <span style="font-weight: 700; font-size: 1em; color: var(--to6lhll-2);">ĐÃ hủy ( <%=cancelOrderSize%> )</span>
                                     </button>
                                 </form>
                             </div>
@@ -77,7 +91,6 @@
                                 <a>
                                     <button class="btn btn-primary" type="button" style="padding: 4px 8px;font-size: 12px;text-transform: capitalize;outline: none;border-radius: 2px;border: 1px solid transparent;background-color: #f8f8f8;border-color: #090808;color: #0a0707;padding-top: 0;text-align: center;margin-left: 25px;">Xem shop</button>
                                 </a>
-                                <span style="font-weight: bold;font-size: 17px;line-height: 24px;color: #090808;text-align: right;text-transform: uppercase;white-space: nowrap;padding-left: 57%;">ĐANG XỬ LÝ</span>
                             </div>
                         </div>
                         <div style="display: flex;overflow: hidden;padding: 15px;">

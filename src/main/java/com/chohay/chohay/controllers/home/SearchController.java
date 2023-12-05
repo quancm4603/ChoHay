@@ -5,6 +5,7 @@
 package com.chohay.chohay.controllers.home;
 
 import com.chohay.chohay.models.Product;
+import com.chohay.chohay.models.User;
 import com.chohay.chohay.services.AddressService;
 import com.chohay.chohay.services.AddressServiceSingleton;
 import com.chohay.chohay.services.ProductService;
@@ -22,6 +23,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -35,6 +37,9 @@ public class SearchController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession(false);
+        User user = (User) session.getAttribute("user");
+        int userId = user.getId();
         request.setCharacterEncoding("UTF-8");
         String keyword = request.getParameter("keyword");
         String category = request.getParameter("category");
@@ -59,13 +64,13 @@ public class SearchController extends HttpServlet {
             int startIndex = (page - 1) * PRODUCTS_PER_PAGE;
             if (keyword != null && category != null) {
                 // Nếu cả keyword và category đều được cung cấp
-                products = productService.getProductsByKeywordAndCategoryWithPagination(keyword, category, startIndex, PRODUCTS_PER_PAGE);
+                products = productService.getProductsByKeywordAndCategoryWithPagination(keyword, category, startIndex, PRODUCTS_PER_PAGE, userId);
             } else if (keyword != null) {
                 // Nếu chỉ có keyword được cung cấp
-                products = productService.getProductsByKeywordWithPagination(keyword, startIndex, PRODUCTS_PER_PAGE);
+                products = productService.getProductsByKeywordWithPagination(keyword, startIndex, PRODUCTS_PER_PAGE, userId);
             } else if (category != null) {
                 // Nếu chỉ có category được cung cấp
-                products = productService.getProductsByCategoryWithPagination(category, startIndex, PRODUCTS_PER_PAGE);
+                products = productService.getProductsByCategoryWithPagination(category, startIndex, PRODUCTS_PER_PAGE, userId);
             }
 
             if (products.size() > 0) {

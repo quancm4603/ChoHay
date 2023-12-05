@@ -10,7 +10,7 @@
          pageEncoding="UTF-8"%>
 
 <%
-    List<Order> deliveredOrder = (List<Order>) request.getAttribute("deliveredOrder");
+    List<Order> cancelOrder = (List<Order>) request.getAttribute("cancelOrder");
     int processingOrderSize = (int) request.getAttribute("processingOrderSize");
     int deliveringOrderSize = (int) request.getAttribute("deliveringOrderSize");
     int deliveredOrderSize = (int) request.getAttribute("deliveredOrderSize");
@@ -23,13 +23,16 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-        <title>Đơn hàng đã giao</title>
+        <title>Đơn hàng đã hủy</title>
         <%@include file="../../views/resources/style.jsp" %>
     </head>
 
     <body style="color: var(--bs-primary-text-emphasis);background: var(--bs-gray-300);">
         <%@include file="../../views/layout/header.jsp" %>
 
+        <h1>${cancelStatus}</h1>
+        <%            session.setAttribute("cancelStatus", "");
+        %>
         <div style="position: relative;margin: 10px auto;width: 70%;">
             <div style="position: relative;margin: 0 auto;width: 936px;background: var(--bs-body-bg);">
                 <div style="width: 100%;height: auto;">
@@ -59,15 +62,15 @@
                                         <span style="font-weight: 700; font-size: 1em; color: var(--to6lhll-2);">đang GIAO ( <%=deliveringOrderSize%> )</span>
                                     </button>
                                 </form>
-                                 <form action="./sell-status" method="post" style="flex: 1; width: auto; text-align: center;">
+                                <form action="./sell-status" method="post" style="flex: 1; width: auto; text-align: center;">
                                     <input name="status" type="hidden" value="delivered">
-                                    <button class="btn btn-primary" type="submit">
+                                    <button class="btn btn-primary" type="submit" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; padding: 1em; justify-content: center; background-color: transparent; color: var(--bs-btn-hover-bg);">
                                         <span style="font-weight: 700; font-size: 1em; color: var(--to6lhll-2);">ĐÃ giao ( <%=deliveredOrderSize%> )</span>
                                     </button>
                                 </form>
-                                    <form action="./sell-status" method="post" style="flex: 1; width: auto; text-align: end;">
+                                <form action="./sell-status" method="post" style="flex: 1; width: auto; text-align: end;">
                                     <input name="status" type="hidden" value="cancel">
-                                    <button class="btn btn-primary" type="submit" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; padding: 1em; justify-content: center; background-color: transparent; color: var(--bs-btn-hover-bg);">
+                                    <button class="btn btn-primary" type="submit">
                                         <span style="font-weight: 700; font-size: 1em; color: var(--to6lhll-2);">ĐÃ hủy ( <%=cancelOrderSize%> )</span>
                                     </button>
                                 </form>
@@ -80,7 +83,7 @@
                 <div style="width: 936px;height: auto;">
 
                     <%
-                        for (Order order : deliveredOrder) {
+                        for (Order order : cancelOrder) {
                     %>
 
                     <!--order here-->

@@ -23,7 +23,7 @@
     subCategory2 = product.getCategory().equals("Apartment") ? "Căn hộ"
             : (product.getCategory().equals("Phone") ? "Điện thoại"
             : (product.getCategory().equals("Dog") ? "Chó" : null));
-
+    int userId = ((User)request.getSession().getAttribute("user")).getId();
 %>
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
@@ -120,7 +120,7 @@
                                 <div style="width: 100%;display: flex;"><span style="font-size: 19px;font-weight: bold;margin: 0px;"><%=shop.getFullName()%></span>
                                     <form action="./shop" method="post">
                                         <input name="shopId" value="<%=shop.getId()%>" type="hidden">
-                                        <button class="btn btn-primary" type="submit" style="border-radius: 4px;background-color: #fff;color: #000;border: 1px solid silver;min-width: 96px!important;height: 24px!important;font-size: 15px!important;line-height: 12px;display: flex!important;justify-content: center;align-items: center;text-align: right;margin: 0 0 0 80px;">Xem trang</button>
+                                        <button class="btn btn-primary" type="submit" style="border-radius: 4px;background-color: #fff;color: #000;border: 1px solid silver;min-width: 96px!important;height: 24px!important;font-size: 15px!important;line-height: 12px;display: flex!important;justify-content: center;align-items: center;">Xem trang</button>
                                     </form>
                                 </div>
                             </div>
@@ -147,9 +147,16 @@
                         <div></div>
                     </div>
                     <div style="margin: 20px;">
+                        <%
+                            if (session.getAttribute("user") == null || (session.getAttribute("user") != null && userId != shop.getId()) ) {
+                        %>
+                        
                         <a href="./create-order?id=<%=product.getId()%>">
                         <button class="btn btn-primary" type="button" style="width: 100%;color: var(--bs-btn-active-color);background: #2e9f55;font-weight: bold;height: 70px;border-radius: 4px;">Mua ngay</button>
                         </a>
+                        <%
+                            }
+                        %>
                         <button class="btn btn-primary" type="button" style="width: 100%;color: var(--bs-btn-active-color);background: #2e9f55;font-weight: bold;height: 70px;border-radius: 4px;margin: 10px 0;"><%=shop.getPhone()%></button>
                     </div>
                 </div>

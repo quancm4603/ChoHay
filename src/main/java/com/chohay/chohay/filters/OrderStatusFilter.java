@@ -64,6 +64,7 @@ public class OrderStatusFilter implements Filter {
             List<Order> processingOrder = new ArrayList<>();
             List<Order> deliveringOrder = new ArrayList<>();
             List<Order> deliveredOrder = new ArrayList<>();
+            List<Order> cancelOrder = new ArrayList<>();
             if (orders.size() > 0) {
                 for (Order order : orders) {
                     // add more details to order
@@ -85,15 +86,20 @@ public class OrderStatusFilter implements Filter {
                     if (order.getStatus() == 2) {
                         deliveredOrder.add(order);
                     }
+                    if (order.getStatus() == -2) {
+                        cancelOrder.add(order);
+                    }
                 }
             }
 
             httpRequest.setAttribute("processingOrder", processingOrder);
             httpRequest.setAttribute("deliveringOrder", deliveringOrder);
             httpRequest.setAttribute("deliveredOrder", deliveredOrder);
+            httpRequest.setAttribute("cancelOrder", cancelOrder);
             httpRequest.setAttribute("processingOrderSize", processingOrder.size());
             httpRequest.setAttribute("deliveringOrderSize", deliveringOrder.size());
             httpRequest.setAttribute("deliveredOrderSize", deliveredOrder.size());
+            httpRequest.setAttribute("cancelOrderSize", cancelOrder.size());
 
         } catch (SQLException ex) {
             Logger.getLogger(OrderStatusFilter.class.getName()).log(Level.SEVERE, null, ex);

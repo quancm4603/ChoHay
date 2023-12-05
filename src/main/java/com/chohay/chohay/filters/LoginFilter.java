@@ -30,7 +30,8 @@ import javax.servlet.http.HttpSession;
     "/cancel-order", 
     "/set-delivered-order",
     "/sell-status",
-    "/set-delivering-sell"
+    "/set-delivering-sell",
+    "/user"
 })
 public class LoginFilter implements Filter {
 

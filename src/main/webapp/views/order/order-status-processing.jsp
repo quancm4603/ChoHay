@@ -14,6 +14,7 @@
     int processingOrderSize = (int) request.getAttribute("processingOrderSize");
     int deliveringOrderSize = (int) request.getAttribute("deliveringOrderSize");
     int deliveredOrderSize = (int) request.getAttribute("deliveredOrderSize");
+    int cancelOrderSize = (int) request.getAttribute("cancelOrderSize");
 %>
 
 <!DOCTYPE html>
@@ -30,23 +31,28 @@
         <%@include file="../../views/layout/header.jsp" %>
 
         <h1>${cancelStatus}</h1>
-        <%
-            session.setAttribute("cancelStatus", "");
+        <%            session.setAttribute("cancelStatus", "");
         %>
         <div style="position: relative;margin: 10px auto;width: 70%;">
             <div style="position: relative;margin: 0 auto;width: 936px;background: var(--bs-body-bg);">
                 <div style="width: 100%;height: auto;">
                     <div style="background-color: #fff;">
-                        <div style="margin-top: 12px;padding: 16px;display: flex;"><a href="#"><span style="font-weight: bold;">Cho hay</span></a><span style="margin-left: 5px;">&gt;</span><span style="margin-left: 5px;">Đơn mua</span></div>
+                        <div style="margin-top: 12px;padding: 16px;display: flex;">
+                            <a href="./">
+                                <span style="font-weight: bold;">Cho hay</span>
+                            </a>
+                            <a href="./order-status">
+                                <span style="margin-left: 5px;">&gt;</span><span style="margin-left: 5px;">Đơn mua</span>
+                            </a>
+                        </div>
                     </div>
                     <div style="background: #fff;border-bottom: 1px solid #f4f4f4; width: 100%">
                         <div style="background: #fff; border-bottom: 1px solid #f4f4f4; width: 100%; overflow: hidden;">
                             <div style="display: flex; overflow-x: auto; justify-content: space-between;">
                                 <form action="./order-status" method="post" style="flex: 1; width: auto; text-align: start;">
                                     <input name="status" type="hidden" value="processing">
-                                    <button class="btn btn-primary" type="submit" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; padding: 1em; justify-content: center; background-color: transparent; color: var(--bs-btn-hover-bg);">
+                                    <button class="btn btn-primary" type="submit">
                                         <span style="font-weight: 700; font-size: 1em; color: var(--to6lhll-2);">đang xử lý ( <%=processingOrderSize%> )</span>
-                                        <span style="background-color: #FF8800; height: 0.25em; width: 100%;"></span>
                                     </button>
                                 </form>
                                 <form action="./order-status" method="post" style="flex: 1; width: auto; text-align: center;">
@@ -55,10 +61,16 @@
                                         <span style="font-weight: 700; font-size: 1em; color: var(--to6lhll-2);">đang GIAO ( <%=deliveringOrderSize%> )</span>
                                     </button>
                                 </form>
-                                 <form action="./order-status" method="post" style="flex: 1; width: auto; text-align: end;">
+                                <form action="./order-status" method="post" style="flex: 1; width: auto; text-align: center;">
                                     <input name="status" type="hidden" value="delivered">
                                     <button class="btn btn-primary" type="submit" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; padding: 1em; justify-content: center; background-color: transparent; color: var(--bs-btn-hover-bg);">
                                         <span style="font-weight: 700; font-size: 1em; color: var(--to6lhll-2);">ĐÃ giao ( <%=deliveredOrderSize%> )</span>
+                                    </button>
+                                </form>
+                                <form action="./order-status" method="post" style="flex: 1; width: auto; text-align: end;">
+                                    <input name="status" type="hidden" value="cancel">
+                                    <button class="btn btn-primary" type="submit" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; padding: 1em; justify-content: center; background-color: transparent; color: var(--bs-btn-hover-bg);">
+                                        <span style="font-weight: 700; font-size: 1em; color: var(--to6lhll-2);">ĐÃ hủy ( <%=cancelOrderSize%> )</span>
                                     </button>
                                 </form>
                             </div>

@@ -41,6 +41,9 @@ public class OrderStatusController extends HttpServlet {
         }else if(status.equals("delivered")){
             RequestDispatcher rd = request.getRequestDispatcher("/views/order/order-status-delivered.jsp");
             rd.forward(request, response);
+        }else if(status.equals("cancel")){
+            RequestDispatcher rd = request.getRequestDispatcher("/views/order/order-status-cancel.jsp");
+            rd.forward(request, response);
         }
 
     }
