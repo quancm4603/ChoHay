@@ -23,6 +23,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -34,6 +35,9 @@ public class HomeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession(false);
+        User user = (User) session.getAttribute("user");
+        int userId = user.getId();
 
         List<Product> products = null;
         //get serrvice
@@ -42,11 +46,7 @@ public class HomeController extends HttpServlet {
         AddressService addressService = AddressServiceSingleton.getInstance();
 
         try {
-            products = productService.getNumberOfProducts(8);
-//                products = productService.getLatestProductsStartingFromN(0, 2);
-//            products = productService.getNumberOfProducts(8);
-            products = productService.getLatestProductsStartingFromN(0, 16);
-//            products = productService.getCheapestProductsStartingFromN(0, 2);
+            products = productService.getLatestProductsStartingFromN(0, 16, userId);
             if (products.size() > 0) {
                 for (Product product : products) {
                     product.setUsername(userService.getFullNameById(product.getUserId()));

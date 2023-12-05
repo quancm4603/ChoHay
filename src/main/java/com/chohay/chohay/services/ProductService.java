@@ -131,14 +131,15 @@ public class ProductService {
         return products;
     }
 
-    public List<Product> getProductsByKeywordWithPagination(String keyword, int startIndex, int limit) throws SQLException {
+    public List<Product> getProductsByKeywordWithPagination(String keyword, int startIndex, int limit, int userId) throws SQLException {
         List<Product> products = new ArrayList<>();
-        String query = "SELECT * FROM Products WHERE name LIKE ? AND status = 0 ORDER BY updated_at DESC LIMIT ? OFFSET ?";
+        String query = "SELECT * FROM Products WHERE name LIKE ? AND status = 0 AND (user_id <> ? OR user_id IS NULL) ORDER BY updated_at DESC LIMIT ? OFFSET ?";
         try (Connection connection = getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, "%" + keyword + "%");
-            preparedStatement.setInt(2, limit);
-            preparedStatement.setInt(3, startIndex);
+            preparedStatement.setInt(2, userId);
+            preparedStatement.setInt(3, limit);
+            preparedStatement.setInt(4, startIndex);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
                     Product product = extractProductFromResultSet(resultSet);
@@ -192,13 +193,14 @@ public class ProductService {
         return products;
     }
 
-    public List<Product> getLatestProductsStartingFromN(int n, int limit) throws SQLException {
+    public List<Product> getLatestProductsStartingFromN(int n, int limit, int userId) throws SQLException {
         List<Product> products = new ArrayList<>();
-        String query = "SELECT * FROM Products WHERE status = 0 ORDER BY updated_at DESC LIMIT ? OFFSET ?";
+        String query = "SELECT * FROM Products WHERE status = 0 AND (user_id <> ? OR user_id IS NULL) ORDER BY updated_at DESC LIMIT ? OFFSET ?";
         try (Connection connection = getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setInt(1, limit);
-            preparedStatement.setInt(2, n);
+            preparedStatement.setInt(1, userId);
+            preparedStatement.setInt(2, limit);
+            preparedStatement.setInt(3, n);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
                     Product product = extractProductFromResultSet(resultSet);
@@ -243,15 +245,16 @@ public class ProductService {
         return products;
     }
 
-    public List<Product> getProductsByKeywordAndCategoryWithPagination(String keyword, String category, int startIndex, int limit) throws SQLException {
+    public List<Product> getProductsByKeywordAndCategoryWithPagination(String keyword, String category, int startIndex, int limit, int userId) throws SQLException {
         List<Product> products = new ArrayList<>();
-        String query = "SELECT * FROM Products WHERE name LIKE ? AND category = ? AND status = 0 ORDER BY updated_at DESC LIMIT ? OFFSET ?";
+        String query = "SELECT * FROM Products WHERE name LIKE ? AND category = ? AND status = 0 AND (user_id <> ? OR user_id IS NULL) ORDER BY updated_at DESC LIMIT ? OFFSET ?";
         try (Connection connection = getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, "%" + keyword + "%");
             preparedStatement.setString(2, category);
-            preparedStatement.setInt(3, limit);
-            preparedStatement.setInt(4, startIndex);
+            preparedStatement.setInt(3, userId);
+            preparedStatement.setInt(4, limit);
+            preparedStatement.setInt(5, startIndex);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
                     Product product = extractProductFromResultSet(resultSet);
@@ -262,14 +265,15 @@ public class ProductService {
         return products;
     }
 
-     public List<Product> getProductsByCategoryWithPagination(String category, int startIndex, int limit) throws SQLException {
+    public List<Product> getProductsByCategoryWithPagination(String category, int startIndex, int limit, int userId) throws SQLException {
         List<Product> products = new ArrayList<>();
-        String query = "SELECT * FROM Products WHERE category = ?  AND status = 0 ORDER BY updated_at DESC LIMIT ? OFFSET ?";
+        String query = "SELECT * FROM Products WHERE category = ? AND status = 0 AND (user_id <> ? OR user_id IS NULL) ORDER BY updated_at DESC LIMIT ? OFFSET ?";
         try (Connection connection = getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, category);
-            preparedStatement.setInt(2, limit);
-            preparedStatement.setInt(3, startIndex);
+            preparedStatement.setInt(2, userId);
+            preparedStatement.setInt(3, limit);
+            preparedStatement.setInt(4, startIndex);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
                     Product product = extractProductFromResultSet(resultSet);
