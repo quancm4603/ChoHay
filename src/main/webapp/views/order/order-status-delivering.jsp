@@ -31,7 +31,7 @@
         <%@include file="../../views/layout/header.jsp" %>
 
         <div style="position: relative;margin: 10px auto;width: 70%;">
-            <div style="position: relative;margin: 0 auto;width: 936px;background: var(--bs-body-bg);">
+            <div style="position: relative;margin: 0 auto;width: 100%;background: var(--bs-body-bg);">
                 <div style="width: 100%;height: auto;">
                     <div style="background-color: #fff;">
                         <div style="margin-top: 12px;padding: 16px;display: flex;">
@@ -76,8 +76,8 @@
                     </div>
                 </div>
             </div>
-            <div style="position: relative;margin: 0 auto;width: 936px;background: var(--bs-body-bg);margin-top: 10px;">
-                <div style="width: 936px;height: auto;">
+            <div style="position: relative;margin: 0 auto;width: 100%;background: var(--bs-body-bg);margin-top: 10px;">
+                <div style="width: 100%;height: auto;">
 
                     <%
                         for (Order order : deliveringOrder) {

@@ -37,4 +37,21 @@ public class User {
     private int role;
     private String avatar;
     
+    //other details
+    private String address;
+
+    public User(int id, String username, String email, String password, String phone, int addressId, String fullName, int role, String avatar) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.phone = phone;
+        this.addressId = addressId;
+        this.fullName = fullName;
+        this.role = role;
+        this.avatar = avatar;
+    }
+    
+    
+    
 }
