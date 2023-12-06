@@ -12,7 +12,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-        <title>Đăng ký vào Chợ Hay</title>
+        <title>Đăng ký tài khoản Chợ Hay</title>
         <%@include file="../resources/style.jsp" %>
         <!--        <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
                 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;300;400;500;600;700&amp;display=swap">
