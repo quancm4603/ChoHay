@@ -36,9 +36,13 @@ public class HomeController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession(false);
-        User user = (User) session.getAttribute("user");
-        int userId = user.getId();
+        User user = null;
+        int userId = -1; // Mặc định là -1 hoặc giá trị không hợp lệ nếu không có user
 
+        if (session != null && session.getAttribute("user") != null) {
+            user = (User) session.getAttribute("user");
+            userId = user.getId();
+        }
         List<Product> products = null;
         //get serrvice
         ProductService productService = ProductServiceSingleton.getInstance();

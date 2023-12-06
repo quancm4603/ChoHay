@@ -38,8 +38,13 @@ public class SearchController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession(false);
-        User user = (User) session.getAttribute("user");
-        int userId = user.getId();
+        User user = null;
+        int userId = -1; // Mặc định là -1 hoặc giá trị không hợp lệ nếu không có user
+
+        if (session != null && session.getAttribute("user") != null) {
+            user = (User) session.getAttribute("user");
+            userId = user.getId();
+        }
         request.setCharacterEncoding("UTF-8");
         String keyword = request.getParameter("keyword");
         String category = request.getParameter("category");
