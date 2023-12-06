@@ -66,7 +66,7 @@
                                         <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
                                             <div class="mb-3">
                                                 <label class="form-label form-label form-label" for="image"><strong>Hình ảnh *</strong></label>
-                                                <input name="image" class="form-control form-control" type="file" id="image" placeholder="Hình ảnh" required="" style="width: 100%;">
+                                                <input name="image" class="form-control form-control" accept="image/*" type="file" id="image" placeholder="Hình ảnh" required="" style="width: 100%;">
                                             </div>
                                         </div>
                                     </div>

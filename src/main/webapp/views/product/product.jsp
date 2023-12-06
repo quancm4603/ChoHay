@@ -23,7 +23,11 @@
     subCategory2 = product.getCategory().equals("Apartment") ? "Căn hộ"
             : (product.getCategory().equals("Phone") ? "Điện thoại"
             : (product.getCategory().equals("Dog") ? "Chó" : null));
-    int userId = ((User)request.getSession().getAttribute("user")).getId();
+    int userId = -1;
+    Object userObj = request.getSession().getAttribute("user");
+    if (userObj != null && userObj instanceof User) {
+        userId = ((User) userObj).getId();
+    }
 %>
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
@@ -83,26 +87,23 @@
                     <div class="row">
 
                         <%
-                            if(product.getCategory().equals("Phone")){
+                            if (product.getCategory().equals("Phone")) {
                         %>
                         <!--layout-->
                         <%@include file="details/Phone.jsp" %>
-                        <%
-                            } else if(product.getCategory().equals("Apartment")){
+                        <%                        } else if (product.getCategory().equals("Apartment")) {
                         %>
                         <!--layout-->
                         <%@include file="details/Apartment.jsp" %>
-                        
-                        <%
-                            } else if(product.getCategory().equals("Dog")){
+
+                        <%                        } else if (product.getCategory().equals("Dog")) {
                         %>
                         <!--layout-->
                         <%@include file="details/Dog.jsp" %>
-                        
-                        <%
-                            } 
+
+                        <%                            }
                         %>
-                        
+
                     </div>
                     <div style="padding: 10px 0;text-align: center;font-size: 25px;">
                         <div style="text-align: left;"><span style="font-size: 20px;font-weight: bold;border-top-style: none;border-bottom-style: solid;">Địa chỉ&nbsp;</span></div>
@@ -118,10 +119,10 @@
                                     <img src="<%=shop.getAvatar()%>" style="border-radius: 50%;display: block;max-width: 100%;width: initial;height: initial;background: none;opacity: 1;border: 0px;padding: 0px;">
                                 </span>
                                 <div style="width: 100%;display: flex;"><span style="font-size: 19px;font-weight: bold;margin: 0px;"><%=shop.getFullName()%></span>
-                                    <form action="./shop" method="post">
-                                        <input name="shopId" value="<%=shop.getId()%>" type="hidden">
+                                    <input name="shopId" value="<%=shop.getId()%>" type="hidden">
+                                    <a href="./shop?id=<%=shop.getId()%>">
                                         <button class="btn btn-primary" type="submit" style="border-radius: 4px;background-color: #fff;color: #000;border: 1px solid silver;min-width: 96px!important;height: 24px!important;font-size: 15px!important;line-height: 12px;display: flex!important;justify-content: center;align-items: center;">Xem trang</button>
-                                    </form>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -142,17 +143,17 @@
                                     <p style="text-align: center;">2 đánh giá</p>
                                 </div>
                             </div>
-   
+
                         </div>
                         <div></div>
                     </div>
                     <div style="margin: 20px;">
                         <%
-                            if (session.getAttribute("user") == null || (session.getAttribute("user") != null && userId != shop.getId()) ) {
+                            if (session.getAttribute("user") == null || (session.getAttribute("user") != null && userId != shop.getId())) {
                         %>
-                        
+
                         <a href="./create-order?id=<%=product.getId()%>">
-                        <button class="btn btn-primary" type="button" style="width: 100%;color: var(--bs-btn-active-color);background: #2e9f55;font-weight: bold;height: 70px;border-radius: 4px;">Mua ngay</button>
+                            <button class="btn btn-primary" type="button" style="width: 100%;color: var(--bs-btn-active-color);background: #2e9f55;font-weight: bold;height: 70px;border-radius: 4px;">Mua ngay</button>
                         </a>
                         <%
                             }

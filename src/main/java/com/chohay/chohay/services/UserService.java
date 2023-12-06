@@ -215,4 +215,14 @@ public class UserService {
         user.setAvatar(resultSet.getString("avatar"));
         return user;
     }
+
+    public void editUserAvatarById(int userId, String newAvatar) throws SQLException {
+        String query = "UPDATE Users SET avatar=? WHERE id=?";
+        try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, newAvatar);
+            preparedStatement.setInt(2, userId);
+            preparedStatement.executeUpdate();
+        }
+    }
+
 }

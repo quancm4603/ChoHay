@@ -28,7 +28,7 @@
         <h1><%=request.getAttribute("status") != null ? request.getAttribute("status") : ""%></h1>
 
         <div style="position: relative;margin: 10px auto;width: 70%;">
-            <div style="position: relative;margin: 0 auto;width: 936px;background: var(--bs-body-bg);">
+            <div style="position: relative;margin: 0 auto;width: 100%;background: var(--bs-body-bg);">
                 <div style="width: 100%;height: auto;">
                     <div style="background-color: #fff;">
                         <div style="margin-top: 12px;padding: 16px;display: flex;"><a href="#"><span style="font-weight: bold;">Cho hay</span></a><span style="margin-left: 5px;">&gt;</span><span style="margin-left: 5px;">Quản lí tin đăng</span></div>
@@ -48,8 +48,8 @@
                     </div>
                 </div>
             </div>
-            <div style="position: relative;margin: 0 auto;width: 936px;background: var(--bs-body-bg);margin-top: 10px;">
-                <div style="width: 936px;height: auto;">
+            <div style="position: relative;margin: 0 auto;width: 100%;background: var(--bs-body-bg);margin-top: 10px;">
+                <div style="width: 100%;height: auto;">
 
                     <%
                         for (Product product : products) {
