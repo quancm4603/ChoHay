@@ -42,7 +42,8 @@ public class ChangeAvatarController extends HttpServlet {
     throws ServletException, IOException {
         //Get UserID
         HttpSession session = request.getSession(false);
-        int userId = ((User) session.getAttribute("user")).getId();
+        User user = ((User) session.getAttribute("user"));
+        int userId = user.getId();
         Part image = request.getPart("avatar");
         if(image != null){
             //get service
@@ -52,6 +53,8 @@ public class ChangeAvatarController extends HttpServlet {
             String newAvatar = firebaseService.uploadImageFromPart(image, "avatar/" + userId + "/");
             try {
                 userService.editUserAvatarById(userId, newAvatar);
+                user.setAvatar(newAvatar);
+                session.setAttribute("user", user);
             } catch (SQLException ex) {
                 Logger.getLogger(ChangeAvatarController.class.getName()).log(Level.SEVERE, null, ex);
             }

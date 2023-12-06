@@ -106,9 +106,9 @@
                         <div class="align-items-xxl-center">
                             <ul class="nav nav-tabs" role="tablist">
                                 <li class="nav-item" role="presentation"><a class="nav-link active" role="tab"
-                                                                            data-bs-toggle="tab" href="#tab-1">Đang hiển thị&nbsp;<span>(3)</span></a></li>
+                                                                            data-bs-toggle="tab" href="#tab-1">Đang hiển thị&nbsp;<span>(<%=shopProducts.size()%>)</span></a></li>
                                 <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab"
-                                                                            href="#tab-2">Đã bán&nbsp;<span>(0)</span></a></li>
+                                                                            href="#tab-2">Đã bán&nbsp;<span>(<%=soldProducts.size()%>)</span></a></li>
                             </ul>
                             <div class="tab-content">
                                 <div class="tab-pane active" role="tabpanel" id="tab-1">
