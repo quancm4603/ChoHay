@@ -86,21 +86,21 @@
 
             // Thêm sự kiện click vào button
             categoryButtonApartment.addEventListener("click", function () {
-                window.location.href = "./search?category=Apartment"; // Đường dẫn mới bạn muốn chuyển hướng
+                window.location.href = "./search?keyword=&category=Apartment"; // Đường dẫn mới bạn muốn chuyển hướng
             });
 
             var categoryButtonPhone = document.getElementById("Phone");
 
             // Thêm sự kiện click vào button
             categoryButtonPhone.addEventListener("click", function () {
-                window.location.href = "./search?category=Phone"; // Đường dẫn mới bạn muốn chuyển hướng
+                window.location.href = "./search?keyword=&category=Phone"; // Đường dẫn mới bạn muốn chuyển hướng
             });
 
             var categoryButtonDog = document.getElementById("Dog");
 
             // Thêm sự kiện click vào button
             categoryButtonDog.addEventListener("click", function () {
-                window.location.href = "./search?category=Dog"; // Đường dẫn mới bạn muốn chuyển hướng
+                window.location.href = "./search?keyword=&category=Dog"; // Đường dẫn mới bạn muốn chuyển hướng
             });
         </script>
 
