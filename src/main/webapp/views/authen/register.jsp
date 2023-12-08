@@ -26,8 +26,8 @@
         <%@include file="../layout/header.jsp" %>
         <section class="position-relative py-4 py-xl-5">
             <div class="container">
-                <div class="row mb-4" style="padding-bottom: 0px;padding-top: 0px;">
-                    <div class="col-md-8 col-xl-6 text-center mx-auto">
+                <div class="row mb-4 justify-content-center" style="padding-bottom: 0px;padding-top: 0px;">
+                    <div class="col-md-8 col-xl-6 text-center" style="width: auto;">
                         <h2 class="headinglog">đăng ký vào chợ hay</h2>
                     </div>
                 </div>
@@ -45,19 +45,23 @@
                                     </div>
                                     <div class="text-start mb-3" style="width:100%;">
                                         <label class="form-label form-label form-label" style="margin-bottom:0px;font-weight:bold;">Tên người dùng *</label>
-                                        <input name="username" class="form-control form-control form-control" type="text" id="username" pattern="^(?=.*[A-Za-z])[A-Za-z\d_]{3,20}$" placeholder="Tên người dùng" required="" style="width:100%;">
+                                        <input name="username" class="form-control form-control form-control" type="text" id="username"  placeholder="Tên người dùng" required="" oninput="checkUsername()" style="width:100%;">
+                                        <p id="usernameValidationMessage"></p>
                                     </div>
                                     <div class="text-start mb-3" style="width:100%;">
                                         <label class="form-label form-label form-label" style="margin-bottom:0px;font-weight:bold;">Họ và tên *</label>
-                                        <input name="fullname" class="form-control form-control form-control" type="text" id="fullName" pattern="^[A-Za-z\sÀ-ỹ]{2,50}$" placeholder="Họ và tên" required="" style="width:100%;">
+                                        <input name="fullname" class="form-control form-control form-control" type="text" id="fullName"  placeholder="Họ và tên"  oninput="checkFullName()" required="" style="width:100%;">
+                                        <p id="fullNameValidationMessage"></p>
                                     </div>
                                     <div class="text-start mb-3" style="width:100%;">
                                         <label class="form-label form-label form-label" style="margin-bottom:0px;font-weight:bold;">Email *</label>
-                                        <input name="email" class="form-control form-control form-control" type="text" id="email" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" placeholder="Email" required="" style="width:100%;">
+                                        <input name="email" class="form-control form-control form-control" type="text" id="email"  placeholder="Email"  oninput="checkEmail()" required="" style="width:100%;">
+                                        <p id="emailValidationMessage"></p>
                                     </div>
                                     <div class="text-start mb-3" style="width:100%;">
                                         <label class="form-label form-label form-label" style="margin-bottom:0px;font-weight:bold;">Số điện thoại *</label>
-                                        <input name="phone" class="form-control form-control form-control" type="text" id="phone" pattern="0[0-9]{9,10}" placeholder="Số điện thoại" required="" style="width:100%;">
+                                        <input name="phone" class="form-control form-control form-control" type="text" id="phone"  placeholder="Số điện thoại"  oninput="checkPhone()" required="" style="width:100%;">
+                                        <p id="phoneValidationMessage"></p>
                                     </div>
                                     <div class="text-start mb-3" style="width:100%;">
                                         <label class="form-label form-label form-label form-label" style="margin-bottom:0px;font-weight:bold;">Mật khẩu *</label>
@@ -109,9 +113,67 @@
                 }
             }
 
+            // Function to check username
+            function checkUsername() {
+                var username = document.getElementById("username").value;
+                var usernameRegex = /^(?=.*[A-Za-z])[A-Za-z\d_]{3,20}$/;
+                var message = document.getElementById("usernameValidationMessage");
+
+                if (!username.match(usernameRegex)) {
+                    message.innerHTML = "Tên người dùng không hợp lệ. Tên người dùng phải chứa ít nhất một chữ cái và có độ dài từ 3 đến 20 ký tự.";
+                    message.style.color = "red";
+                } else {
+                    message.innerHTML = "";
+                }
+            }
+
+// Function to check full name
+            function checkFullName() {
+                var fullName = document.getElementById("fullName").value;
+                var fullNameRegex = /^[A-Za-z\sÀ-ỹ]{2,50}$/;
+                var message = document.getElementById("fullNameValidationMessage");
+
+                if (!fullName.match(fullNameRegex)) {
+                    message.innerHTML = "Họ và tên không hợp lệ. Họ và tên chỉ chứa chữ cái và khoảng trắng và có độ dài từ 2 đến 50 ký tự.";
+                    message.style.color = "red";
+                } else {
+                    message.innerHTML = "";
+                }
+            }
+
+// Function to check email
+            function checkEmail() {
+                var email = document.getElementById("email").value;
+                var emailRegex = /^[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$/;
+                var message = document.getElementById("emailValidationMessage");
+
+                if (!email.match(emailRegex)) {
+                    message.innerHTML = "Email không hợp lệ. Vui lòng nhập đúng định dạng Email.";
+                    message.style.color = "red";
+                } else {
+                    message.innerHTML = "";
+                }
+            }
+
+// Function to check phone number
+            function checkPhone() {
+                var phone = document.getElementById("phone").value;
+                var phoneRegex = /^0[0-9]{9,10}$/;
+                var message = document.getElementById("phoneValidationMessage");
+
+                if (!phone.match(phoneRegex)) {
+                    message.innerHTML = "Số điện thoại không hợp lệ. Số điện thoại bắt đầu bằng số 0 và có độ dài từ 10 đến 11 số.";
+                    message.style.color = "red";
+                } else {
+                    message.innerHTML = "";
+                }
+            }
+
             document.querySelector('.form-register').addEventListener('submit', function (event) {
                 var password = document.getElementById("password").value;
                 var confirmPassword = document.getElementById("confirmPassword").value;
+
+               
                 var passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,16}$/;
                 if (!password.match(passwordRegex)) {
                     event.preventDefault(); // Ngăn chặn sự kiện mặc định của form (submit)
@@ -125,7 +187,18 @@
                     alert("Mật khẩu không khớp. Vui lòng nhập lại.");
                 }
                 // Nếu mật khẩu khớp, form sẽ tiếp tục submit
+                // Hàm kiểm tra và hiển thị cảnh báo cho các trường input
+
+
+                // Kiểm tra Địa chỉ cụ thể
+                var street = document.getElementById("street").value;
+                if (street === "") {
+                    event.preventDefault();
+                    alert("Vui lòng nhập Địa chỉ cụ thể.");
+                }
+
             });
+
         </script>
         <script>
             //Get data from api

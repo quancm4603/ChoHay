@@ -22,6 +22,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
+import net.coobird.thumbnailator.Thumbnails;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.nio.file.Paths;
 
 /**
  *
@@ -50,7 +55,19 @@ public class ChangeAvatarController extends HttpServlet {
             UserService userService = UserServiceSingleton.getInstance();
             FirebaseService firebaseService = FirebaseServiceSingleton.getInstance();
             
-            String newAvatar = firebaseService.uploadImageFromPart(image, "avatar/" + userId + "/");
+            // Nén hình ảnh trước khi tải lên
+            InputStream inputStream = image.getInputStream();
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            Thumbnails.of(inputStream)
+                .size(200, 200) // Kích thước nén (ở đây là 200x200)
+                .outputFormat("jpg") // Định dạng ảnh sau khi nén
+                .toOutputStream(outputStream);
+            
+            // Tải ảnh nén lên Firebase
+            String fileName = "avatar/" + userId + "/" + Paths.get(image.getSubmittedFileName()).getFileName().toString();
+            String newAvatar = firebaseService.uploadImageFromInputStream(
+                new ByteArrayInputStream(outputStream.toByteArray()), fileName, image.getContentType());
+            
             try {
                 userService.editUserAvatarById(userId, newAvatar);
                 user.setAvatar(newAvatar);
