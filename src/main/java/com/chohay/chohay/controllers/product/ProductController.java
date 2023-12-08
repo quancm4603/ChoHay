@@ -46,7 +46,7 @@ public class ProductController extends HttpServlet {
             //Close connection
             productService.closeConnection();
 
-            if (product != null) {
+            if (product != null && product.getStatus() == 0) {
                 request.setAttribute("product", product);
                 //Get Address service
                 AddressService addressService = AddressServiceSingleton.getInstance();

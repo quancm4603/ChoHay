@@ -14,7 +14,6 @@ import com.chohay.chohay.services.ProductServiceSingleton;
 import com.chohay.chohay.services.UserService;
 import com.chohay.chohay.services.UserServiceSingleton;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -31,8 +30,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author caomi
  */
-@WebServlet(name = "ProductManagerController", urlPatterns = {"/product-manager"})
-public class ProductManagerController extends HttpServlet {
+@WebServlet(name = "ProductManagerDeletedController", urlPatterns = {"/product-manager-deleted"})
+public class ProductManagerDeletedController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -77,7 +76,7 @@ public class ProductManagerController extends HttpServlet {
         userService.closeConnection();
         addressService.closeConnection();
         
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/product/product-manager.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/views/product/product-manager-deleted.jsp");
         requestDispatcher.forward(request, response);
     }
 

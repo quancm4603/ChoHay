@@ -32,7 +32,7 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "SearchController", urlPatterns = {"/search"})
 public class SearchController extends HttpServlet {
 
-    private static final int PRODUCTS_PER_PAGE = 10;
+    private static final int PRODUCTS_PER_PAGE = 12;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
