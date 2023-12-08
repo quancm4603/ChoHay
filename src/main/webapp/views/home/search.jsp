@@ -30,7 +30,7 @@
         <%@include file="../resources/style.jsp" %>
     </head>
 
-    <body>
+    <body style=" background-color: #f2f2f2;">
         <%@include file="../layout/header.jsp" %>
         <!--bodyhere-->
         <!-- Thanh lựa chọn danh mục -->

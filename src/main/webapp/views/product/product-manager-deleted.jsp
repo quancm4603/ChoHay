@@ -38,18 +38,16 @@
                         <div style="display: flex;overflow: hidden;">
                             <div style="--t1fgqb9w-0: auto;overflow-x: var(--t1fgqb9w-0);flex: 1 1 auto;display: flex;position: relative;white-space: nowrap;/*--t1fgqb9w-0: auto;*/">
                                 <form action="./product-manager" method="get">
-                                    <input name="status" type="hidden" value="processing">
                                     <button class="btn btn-primary" type="submit" style="--display: inline-flex;line-height: 1;flex-direction: row-reverse;padding: 14px;display: var(--display);justify-content: center;background-color: transparent;position: relative;line-height: 1;flex-direction: row-reverse;padding: 14px;color: var(--bs-btn-hover-bg);">
                                         <span style="min-height: unset;min-width: unset;margin-left: 4px;display: inline-flex;align-items: center;flex-direction: column;justify-content: center;height: 100%;font-weight: 700;font-size: .95rem;color: var(--to6lhll-2);">Tin đang hiển thị ( <%=products.size()%> )</span>
-                                        <span style="min-height: unset;min-width: unset;margin-left: 4px;--twdt1ol-0: #FF8800;background-color: var(--twdt1ol-0);bottom: 0;height: 4px;position: absolute;width: 100%;"></span>
                                     </button>
                                 </form>
                             </div>
                             <div style="--t1fgqb9w-0: auto;overflow-x: var(--t1fgqb9w-0);flex: 1 1 auto;display: flex;position: relative;white-space: nowrap;/*--t1fgqb9w-0: auto;*/">
                                 <form action="./product-manager-deleted" method="get">
-                                    <input name="status" type="hidden" value="processing">
                                     <button class="btn btn-primary" type="submit" style="--display: inline-flex;line-height: 1;flex-direction: row-reverse;padding: 14px;display: var(--display);justify-content: center;background-color: transparent;position: relative;line-height: 1;flex-direction: row-reverse;padding: 14px;color: var(--bs-btn-hover-bg);">
                                         <span style="min-height: unset;min-width: unset;margin-left: 4px;display: inline-flex;align-items: center;flex-direction: column;justify-content: center;height: 100%;font-weight: 700;font-size: .95rem;color: var(--to6lhll-2);">Tin đã xóa ( <%=deletedProducts.size()%> )</span>
+                                        <span style="min-height: unset;min-width: unset;margin-left: 4px;--twdt1ol-0: #FF8800;background-color: var(--twdt1ol-0);bottom: 0;height: 4px;position: absolute;width: 100%;"></span>
                                     </button>
                                 </form>
                             </div>
@@ -61,7 +59,7 @@
                 <div style="width: 100%;height: auto;">
 
                     <%
-                        for (Product product : products) {
+                        for (Product product : deletedProducts) {
                     %>
 
                     <!--order here-->
@@ -92,12 +90,6 @@
 
 
                     <div style="padding-top: 5px;">
-                        <div style="text-align: end;">
-                            <form action="./delete-product" method="post">
-                                <input name="productId" type="hidden" value="<%=product.getId()%>">
-                                <button class="btn btn-primary" type="submit">XÓA TIN</button>
-                            </form>
-                        </div>
                     </div>
                     <%
                         }

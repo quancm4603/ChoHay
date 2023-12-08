@@ -22,7 +22,7 @@
                 <link rel="stylesheet" href="assets/css/styles.min.css">-->
     </head>
 
-    <body>
+    <body style=" background-color: #f2f2f2;">
         <%@include file="../layout/header.jsp" %>
         <section class="position-relative py-4 py-xl-5">
             <div class="container">
@@ -65,7 +65,8 @@
                                     </div>
                                     <div class="text-start mb-3" style="width:100%;">
                                         <label class="form-label form-label form-label form-label" style="margin-bottom:0px;font-weight:bold;">Mật khẩu *</label>
-                                        <input name="password" class="form-control form-control form-control" type="password" id="password" placeholder="Mật khẩu" required="" style="width:100%;">
+                                        <input name="password" class="form-control form-control form-control" type="password" id="password" placeholder="Mật khẩu" required="" oninput="checkPassword2()" style="width:100%;">
+                                        <p id="passwordValidationMessage"></p>
                                     </div>
                                     <div class="text-start mb-3" style="width:100%;">
                                         <label class="form-label form-label form-label form-label" style="margin-bottom:0px;font-weight:bold;">Nhập lại mật khẩu *</label>
@@ -169,11 +170,26 @@
                 }
             }
 
+            function checkPassword2() {
+                var password = document.getElementById("password").value;
+                var message = document.getElementById("passwordValidationMessage");
+
+                var passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,32}$/;
+
+                if (!password.match(passwordRegex)) {
+                    message.innerHTML = "Mật khẩu không hợp lệ. Mật khẩu phải chứa ít nhất một chữ hoa, một chữ thường, một số và có độ dài từ 6 đến 32 ký tự.";
+                    message.style.color = "red";
+                } else {
+                    message.innerHTML = "";
+                }
+            }
+
+
             document.querySelector('.form-register').addEventListener('submit', function (event) {
                 var password = document.getElementById("password").value;
                 var confirmPassword = document.getElementById("confirmPassword").value;
 
-               
+
                 var passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,16}$/;
                 if (!password.match(passwordRegex)) {
                     event.preventDefault(); // Ngăn chặn sự kiện mặc định của form (submit)

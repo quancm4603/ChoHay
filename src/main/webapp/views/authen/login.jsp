@@ -11,7 +11,7 @@
         <%@include file="../resources/style.jsp" %>
     </head>
 
-    <body>
+    <body style=" background-color: #f2f2f2;">
         <%@include file="../layout/header.jsp" %>
         <section class="position-relative py-4 py-xl-5" style="height: auto;">
             <div class="container">

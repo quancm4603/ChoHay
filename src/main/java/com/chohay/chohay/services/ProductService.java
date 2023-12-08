@@ -299,6 +299,22 @@ public class ProductService {
         }
         return products;
     }
+    
+    public List<Product> getDeletedProductsByUserId(int userId) throws SQLException {
+        List<Product> products = new ArrayList<>();
+        String query = "SELECT * FROM Products WHERE user_id = ? AND status = -1 ORDER BY updated_at DESC";
+        try (Connection connection = getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, userId);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    Product product = extractProductFromResultSet(resultSet);
+                    products.add(product);
+                }
+            }
+        }
+        return products;
+    }
 
     public boolean deleteProductById(int productId) throws SQLException {
         String query = "UPDATE Products SET status = -1 WHERE id = ?";
@@ -315,7 +331,7 @@ public class ProductService {
         List<Product> products = new ArrayList<>();
         String query = "SELECT p.* FROM Products p "
                 + "INNER JOIN Orders o ON p.id = o.product_id "
-                + "WHERE p.user_id = ? AND o.status = 2 AND p.status = 0";
+                + "WHERE p.user_id = ? AND o.status = 2";
         try (Connection connection = getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, userId);

@@ -21,7 +21,7 @@
         <%@include file="../resources/style.jsp" %>
     </head>
 
-    <body>
+    <body style=" background-color: #f2f2f2;">
         <%@include file="../layout/header.jsp" %>
         <!--bodyhere-->
 
@@ -42,26 +42,29 @@
                     %>           
 
                     <div class="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-3 col-xxl-3 formhome" style="background:#ffffff;padding:12px;transition:200ms;">
-                        <div class="titlehome">
-                            <div class="adthumnail">
-                                <!-- Thêm class 'imghome' cho việc quản lý hình ảnh -->
-                                <img class="imghome" src="<%=product.getImage()%>" style="width: 100%;  height: 200px; object-fit: cover;">
-                                <!-- Đặt chiều rộng cố định là 100% của container -->
+                        <a href="./product?id=<%=product.getId()%>" >
+                            <div class="titlehome">
+                                <div class="adthumnail">
+                                    <!-- Thêm class 'imghome' cho việc quản lý hình ảnh -->
+                                    <img class="imghome" src="<%=product.getImage()%>" style="width: 100%;  height: 200px; object-fit: cover;">
+                                    <!-- Đặt chiều rộng cố định là 100% của container -->
+                                </div>
+                                <div>
+                                    <a class="texthome" href="./product?id=<%=product.getId()%>" style="display: block; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; max-width: 100%;"><%=product.getName()%></a>
+                                    <div><span class="pricehome"><%=product.getPriceToString()%> đ</span></div>
+                                </div>
+                                <div class="AdBody_footer__78mtV">
+                                    <a rel="noopener noreferrer" target="_blank">
+                                        <img class="commonStyle_image__2y3kd commonStyle_round__3k7wj" height="16" width="16" src="https://static.chotot.com/storage/chotot-icons/svg/user.svg" alt="<%=product.getUsername()%>">
+                                    </a>
+                                    <div class="commonStyle_deviderWrapper__3FHXZ" style="margin-right:5px;"></div>
+                                    <div class="AdBody_adItemPostedTime__Oj7pr"><span class="AdBody_text__vR5s0"><%=product.getTimeDifference()%></span></div>
+                                    <div class="commonStyle_deviderWrapper__3FHXZ" style="margin-right:5px;"></div>
+                                    <span class="AdBody_adItemPostedTime__Oj7pr AdBody_location__ujScT"><span class="AdBody_text__vR5s0"><%=product.getAddress()%></span></span>
+                                </div>
+
                             </div>
-                            <div>
-                                <a class="texthome" href="./product?id=<%=product.getId()%>" style="display: block; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; max-width: 100%;"><%=product.getName()%></a>
-                                <div><span class="pricehome"><%=product.getPriceToString()%> đ</span></div>
-                            </div>
-                            <div class="AdBody_footer__78mtV">
-                                <a rel="noopener noreferrer" target="_blank">
-                                    <img class="commonStyle_image__2y3kd commonStyle_round__3k7wj" height="16" width="16" src="https://static.chotot.com/storage/chotot-icons/svg/user.svg" alt="<%=product.getUsername()%>">
-                                </a>
-                                <div class="commonStyle_deviderWrapper__3FHXZ" style="margin-right:5px;"></div>
-                                <div class="AdBody_adItemPostedTime__Oj7pr"><span class="AdBody_text__vR5s0"><%=product.getTimeDifference()%></span></div>
-                                <div class="commonStyle_deviderWrapper__3FHXZ" style="margin-right:5px;"></div>
-                                <span class="AdBody_adItemPostedTime__Oj7pr AdBody_location__ujScT"><span class="AdBody_text__vR5s0"><%=product.getAddress()%></span></span>
-                            </div>
-                        </div>
+                        </a>
                     </div>
 
 
@@ -85,14 +88,14 @@
             categoryButtonApartment.addEventListener("click", function () {
                 window.location.href = "./search?category=Apartment"; // Đường dẫn mới bạn muốn chuyển hướng
             });
-            
+
             var categoryButtonPhone = document.getElementById("Phone");
 
             // Thêm sự kiện click vào button
             categoryButtonPhone.addEventListener("click", function () {
                 window.location.href = "./search?category=Phone"; // Đường dẫn mới bạn muốn chuyển hướng
             });
-            
+
             var categoryButtonDog = document.getElementById("Dog");
 
             // Thêm sự kiện click vào button
